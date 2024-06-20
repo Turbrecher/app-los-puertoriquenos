@@ -1,0 +1,23 @@
+<article class="admin_page">
+
+    <section class="admin_nav">
+        <article class="create">
+            <h1>CREAR</h1>
+            <a routerLink="/admin/creategame" routerLinkActive="active">PARTIDA</a>
+            <a routerLink="/admin/createtournament" routerLinkActive="active">TORNEO</a>
+            <a routerLink="/admin/createplayer" routerLinkActive="active">JUGADOR</a>
+        </article>
+
+        <article class="list">
+            <h1>LISTAR</h1>
+            <a routerLink="/admin/listgames" routerLinkActive="active">PARTIDA</a>
+            <a routerLink="/admin/listtournaments" routerLinkActive="active">TORNEO</a>
+            <a routerLink="/admin/listplayers" routerLinkActive="active">JUGADOR</a>
+        </article>
+    </section>
+
+    <section class="admin_content">
+        <router-outlet></router-outlet>
+    </section>
+
+</article>

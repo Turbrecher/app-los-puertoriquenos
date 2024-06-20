@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { Torneo } from '../../../shared/models/torneo';
 import { PuntuacionesService } from '../../puntuaciones.service';
+import { TarjetaTorneoComponent } from '../../../shared/components/tarjeta-torneo/tarjeta-torneo.component';
 
 
 @Component({
   selector: 'app-torneos-list',
   standalone: true,
-  imports: [],
+  imports: [TarjetaTorneoComponent],
   templateUrl: './torneos-list.component.html',
   styleUrl: './torneos-list.component.sass'
 })
