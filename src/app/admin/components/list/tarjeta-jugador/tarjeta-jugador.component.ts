@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-tarjeta-jugador',
@@ -8,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrl: './tarjeta-jugador.component.sass'
 })
 export class TarjetaJugadorComponent {
+  @Input() nombre:String = "Nombre por defecto"
+  @Input() apellidos:String = "Apellidos por defecto"
+  @Input() username:String = "Username por defecto"
 
+  
 }

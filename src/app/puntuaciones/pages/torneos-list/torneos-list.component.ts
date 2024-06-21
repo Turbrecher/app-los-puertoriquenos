@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Torneo } from '../../../shared/models/torneo';
 import { PuntuacionesService } from '../../puntuaciones.service';
-import { TarjetaTorneoComponent } from '../../../shared/components/tarjeta-torneo/tarjeta-torneo.component';
+import { TarjetaTorneoComponent  } from '../../components/tarjeta-torneo/tarjeta-torneo.component';
 
 
 @Component({

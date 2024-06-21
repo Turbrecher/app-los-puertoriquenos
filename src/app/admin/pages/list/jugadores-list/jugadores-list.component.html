@@ -1,1 +1,9 @@
-<p>jugadores-list works!</p>
+<article class="titulo">
+    Lista de jugadores
+</article>
+
+<article class="jugadores">
+    @for (jugador of jugadores; track jugador) {
+        <app-tarjeta-jugador [username]="jugador.username" [nombre]="jugador.nombre" [apellidos]="jugador.apellidos"></app-tarjeta-jugador>
+    }
+</article>

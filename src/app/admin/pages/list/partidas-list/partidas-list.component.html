@@ -1,1 +1,9 @@
-<p>partidas-list works!</p>
+<article class="titulo">
+    Lista de partidas
+</article>
+
+<article class="partidas">
+    @for (partida of partidas; track partida) {
+        <app-tarjeta-partida [nombre] = "partida.nombre" [fecha]="partida.fecha" [torneo]="partida.torneo"></app-tarjeta-partida>
+    }
+</article>

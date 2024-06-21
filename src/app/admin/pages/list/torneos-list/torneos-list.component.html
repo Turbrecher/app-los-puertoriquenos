@@ -1,1 +1,9 @@
-<p>torneos-list works!</p>
+<article class="titulo">
+    <h1>Lista de torneos</h1>
+</article>
+
+<article class="torneos">
+    @for (torneo of torneos; track torneo) {
+    <app-tarjeta-torneo [nombre]="torneo.nombre" [fechaInicio]="torneo.fechaInicio" [fechaFinal]="torneo.fechaFinal" />
+    }
+</article>

@@ -1,6 +1,6 @@
 export interface Torneo {
     id: Number
     nombre: String
-    fechaInicio: Date
-    fechaFinal: Date
+    fechaInicio: String
+    fechaFinal: String
 }

@@ -1,12 +1,23 @@
 import { Component } from '@angular/core';
+import { AdminService } from '../../../admin.service';
+import { Partida } from '../../../../shared/models/partida';
+import { TarjetaPartidaComponent } from '../../../components/list/tarjeta-partida/tarjeta-partida.component';
 
 @Component({
-  selector: 'app-partidas-list',
+  selector: 'admin-partidas-list',
   standalone: true,
-  imports: [],
+  imports: [TarjetaPartidaComponent],
   templateUrl: './partidas-list.component.html',
   styleUrl: './partidas-list.component.sass'
 })
 export class PartidasListComponent {
+  partidas: Array<Partida> = []
 
+  constructor(public adminService: AdminService) {
+
+  }
+
+  ngOnInit() {
+    this.partidas = this.adminService.getPartidas();
+  }
 }
