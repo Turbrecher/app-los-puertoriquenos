@@ -1,1 +1,29 @@
-<p>form-create-partida works!</p>
+<form [formGroup]="formPartida"  class="create_partida">
+
+    <section class="form_group">
+        <label>Nombre</label>
+        <input type="text" formControlName="nombre">
+        <section class="error" [hidden]="nombre.valid || nombre.pristine">Su nombre no es valido</section>
+    </section>
+
+    <section class="form_group">
+        <label>Fecha</label>
+        <input type="date" formControlName="fecha">
+        <section class="error" [hidden]="fecha.valid || fecha.pristine">Su fecha no es valido</section>
+    </section>
+
+    <section class="form_group">
+        <label>Torneo</label>
+        <select formControlName="torneosSelect">
+            @for (torneo of torneos; track torneos) {
+                <option value="{{torneo.id}}">{{torneo.nombre}}</option>
+            }
+        </select>
+        <section class="error" [hidden]="torneosSelect.valid || torneosSelect.pristine">Debe elegir un torneo</section>
+    </section>
+
+    <section class="form_group">
+        <button [disabled]="formPartida.invalid" (click)="crearPartida()">CREAR</button>
+    </section>
+
+</form>

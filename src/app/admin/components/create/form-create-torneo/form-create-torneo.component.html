@@ -1,1 +1,23 @@
-<p>form-create-torneo works!</p>
+<form [formGroup]="formTorneo" class="create_torneo">
+    <section class="form_group">
+        <label>Nombre</label>
+        <input formControlName="nombre" type="text" name="" id="">
+        <section [hidden]="nombre.valid || nombre.pristine" class="error">El nombre no es válido</section>
+    </section>
+
+    <section class="form_group">
+        <label>Fecha Inicio</label>
+        <input formControlName="fechaInicio" type="date" name="" id="">
+        <section [hidden]="fechaInicio.valid || fechaInicio.pristine" class="error">La fecha no es válida</section>
+    </section>
+
+    <section class="form_group">
+        <label>Fecha Final</label>
+        <input formControlName="fechaFinal" type="date" name="" id="">
+        <section [hidden]="fechaFinal.valid || fechaFinal.pristine" class="error">La fecha no es válida</section>
+    </section>
+
+    <section class="form_group">
+        <button (click)="crearTorneo()" [disabled]="formTorneo.invalid">CREAR</button>
+    </section>
+</form>

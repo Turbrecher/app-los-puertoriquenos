@@ -11,6 +11,22 @@ export class AdminService {
   constructor() { }
 
 
+  getPartida(id:Number):Partida{
+    return {
+      id: 1,
+        nombre: "Partida guapa 1",
+        fecha: "22/05/14",
+        torneo: {
+          id: 1,
+          nombre: "Torneo por defecto 1",
+          fechaInicio: "25/04/2002",
+          fechaFinal: "25/04/2024"
+
+        }
+    }
+  }
+
+
 
   getPartidas(): Array<Partida> {
     return [

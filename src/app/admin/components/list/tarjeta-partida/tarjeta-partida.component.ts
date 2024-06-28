@@ -9,8 +9,7 @@ import { Torneo } from '../../../../shared/models/torneo';
   styleUrl: './tarjeta-partida.component.sass'
 })
 export class TarjetaPartidaComponent {
-
-  @Input() id: Number = 0
+  
   @Input() nombre: String = "Partida por defecto"
   @Input() fecha: String = '25-04-2002'
   @Input() torneo: Torneo = {
