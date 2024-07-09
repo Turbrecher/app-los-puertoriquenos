@@ -4,6 +4,6 @@
 
 <article class="partidas">
     @for (partida of partidas; track partida) {
-        <app-tarjeta-partida [nombre] = "partida.nombre" [fecha]="partida.fecha" [torneo]="partida.torneo"></app-tarjeta-partida>
+        <app-tarjeta-partida [id]="partida.id" [nombre] = "partida.nombre" [fecha]="partida.fecha" [torneo]="partida.torneo"></app-tarjeta-partida>
     }
 </article>

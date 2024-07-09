@@ -11,18 +11,18 @@ export class AdminService {
   constructor() { }
 
 
-  getPartida(id:Number):Partida{
+  getPartida(id: Number): Partida {
     return {
       id: 1,
-        nombre: "Partida guapa 1",
-        fecha: "22/05/14",
-        torneo: {
-          id: 1,
-          nombre: "Torneo por defecto 1",
-          fechaInicio: "25/04/2002",
-          fechaFinal: "25/04/2024"
+      nombre: "Partida guapa 1",
+      fecha: "2024-04-25",
+      torneo: {
+        id: 1,
+        nombre: "Torneo por defecto 1",
+        fechaInicio: "2024-04-25",
+        fechaFinal: "2024-04-25"
 
-        }
+      }
     }
   }
 
@@ -34,12 +34,12 @@ export class AdminService {
       {
         id: 1,
         nombre: "Partida guapa 1",
-        fecha: "22/05/14",
+        fecha: "2024-04-25",
         torneo: {
           id: 1,
           nombre: "Torneo por defecto 1",
-          fechaInicio: "25/04/2002",
-          fechaFinal: "25/04/2024"
+          fechaInicio: "2024-04-25",
+          fechaFinal: "2024-04-25"
 
         }
       },
@@ -47,12 +47,12 @@ export class AdminService {
       {
         id: 2,
         nombre: "Partida guapa 2",
-        fecha: "22/05/19",
+        fecha: "2024-04-25",
         torneo: {
           id: 1,
           nombre: "Torneo por defecto 2",
-          fechaInicio: "25/04/2002",
-          fechaFinal: "25/04/2024"
+          fechaInicio: "2024-04-25",
+          fechaFinal: "2024-04-25"
 
         }
       },
@@ -60,12 +60,12 @@ export class AdminService {
       {
         id: 3,
         nombre: "Partida guapa 3",
-        fecha: "22/05/22",
+        fecha: "2024-04-25",
         torneo: {
           id: 1,
           nombre: "Torneo por defecto 3",
-          fechaInicio: "25/04/2002",
-          fechaFinal: "25/04/2024"
+          fechaInicio: "2024-04-25",
+          fechaFinal: "2024-04-25"
 
         }
       },
@@ -73,12 +73,12 @@ export class AdminService {
       {
         id: 4,
         nombre: "Partida guapa 4",
-        fecha: "22/05/99",
+        fecha: "2024-04-25",
         torneo: {
           id: 1,
           nombre: "Torneo por defecto 4",
-          fechaInicio: "25/04/2002",
-          fechaFinal: "25/04/2024"
+          fechaInicio: "2024-04-25",
+          fechaFinal: "2024-04-25"
 
         }
       },
@@ -118,6 +118,17 @@ export class AdminService {
 
     return torneos
 
+
+
+  }
+
+  getTorneo(id: Number): Torneo {
+    return {
+      id: 1,
+      nombre: "Torneo Victor",
+      fechaInicio: '2024-04-25',
+      fechaFinal: '2025-04-25'
+    }
   }
 
   getJugadores(): Array<Jugador> {
@@ -145,6 +156,15 @@ export class AdminService {
     ]
 
     return jugadores
+  }
+
+  getJugador(id: Number): Jugador {
+    return {
+      id: 1,
+      nombre: "Mariangeles",
+      apellidos: "Coronel Morgado",
+      username: "Peteters"
+    }
   }
 
 

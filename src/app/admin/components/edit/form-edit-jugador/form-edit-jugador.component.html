@@ -1,1 +1,25 @@
-<p>form-edit-jugador works!</p>
+<form [formGroup]="formJugador"  class="edit_jugador">
+
+    <section class="form_group">
+        <label>Nombre</label>
+        <input formControlName="nombre" type="text">
+        <section [hidden]="nombre.valid || nombre.pristine" class="error">El nombre no es válido</section>
+    </section>
+
+    <section class="form_group">
+        <label>Apellidos</label>
+        <input formControlName="apellidos" type="text">
+        <section [hidden]="apellidos.valid || apellidos.pristine" class="error">Los apellidos no son válidos</section>
+    </section>
+
+    <section class="form_group">
+        <label>Username</label>
+        <input formControlName="username" type="text">
+        <section [hidden]="username.valid || username.pristine" class="error">El username no es válido</section>
+    </section>
+
+    <section class="form_group">
+        <button [disabled]="formJugador.invalid" (click)="editarJugador()">EDITAR</button>
+    </section>
+
+</form>
