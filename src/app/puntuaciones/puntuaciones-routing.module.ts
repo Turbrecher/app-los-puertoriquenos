@@ -5,7 +5,10 @@ import { TorneosListComponent } from './pages/torneos-list/torneos-list.componen
 const routes: Routes = [
   {
     path: "tournaments", component: TorneosListComponent
-},
+  }, 
+  {
+    path: "tournaments/:id", component: TorneosListComponent
+  },
 ];
 
 @NgModule({

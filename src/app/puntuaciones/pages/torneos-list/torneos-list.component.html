@@ -4,6 +4,6 @@
 
 <article class="torneos">
     @for (torneo of torneos; track torneo) {
-    <app-tarjeta-torneo [nombre]="torneo.nombre" [fechaInicio]="torneo.fechaInicio" [fechaFinal]="torneo.fechaFinal" />
+    <app-tarjeta-torneo [id]="torneo.id" [nombre]="torneo.nombre" [fechaInicio]="torneo.fechaInicio" [fechaFinal]="torneo.fechaFinal" />
     }
 </article>
