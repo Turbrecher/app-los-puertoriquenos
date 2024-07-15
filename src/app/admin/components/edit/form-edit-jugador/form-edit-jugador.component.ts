@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AdminService } from '../../../admin.service';
 import { Jugador } from '../../../../shared/models/jugador';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/internal/Observable';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 @Component({
   selector: 'app-form-edit-jugador',
@@ -32,16 +35,20 @@ export class FormEditJugadorComponent {
 
 
 
-  constructor(private fb: FormBuilder, public adminService: AdminService) { 
-    
+  constructor(private fb: FormBuilder, public adminService: AdminService, private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
-    let jugador: Jugador = this.adminService.getJugador(1)
+    let id = this.activatedRoute.snapshot.params['id']
+    let jugador: Observable<Jugador> = this.adminService.getJugador(id)
+    
+    jugador.subscribe((jugador) => {
+      this.nombre.setValue(jugador.nombre)
+      this.apellidos.setValue(jugador.apellidos)
+      this.username.setValue(jugador.username)
+    })
 
-    this.nombre.setValue(jugador.nombre)
-    this.apellidos.setValue(jugador.apellidos)
-    this.username.setValue(jugador.username)
+
   }
 
 

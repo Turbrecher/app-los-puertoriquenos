@@ -2,118 +2,58 @@ import { Injectable } from '@angular/core';
 import { Partida } from '../shared/models/partida';
 import { Torneo } from '../shared/models/torneo';
 import { Jugador } from '../shared/models/jugador';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/internal/Observable';
+import { Subscription } from 'rxjs/internal/Subscription';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
 
-  constructor() { }
+  private readonly ROOT_URL = 'http://localhost:8000/api/'
+  constructor(private httpClient: HttpClient) { }
 
 
-  getPartida(id: Number): Partida {
-    return {
-      id: 1,
-      nombre: "Partida guapa 1",
-      fecha: "2024-04-25",
-      torneo: {
-        id: 1,
-        nombre: "Torneo por defecto 1",
-        fechaInicio: "2024-04-25",
-        fechaFinal: "2024-04-25"
+  //Método que obtiene una partida específica en forma de observable, que luego se procesa donde llega.
+  getPartida(id: Number): Observable<Partida> {
+    return this.httpClient.get<Partida>(this.ROOT_URL + 'partidas/' + id)
+  }
 
-      }
-    }
+  //Método que obtiene una partida específica en forma de observable, que luego se procesa donde llega.
+  getTorneo(id: Number): Observable<Torneo> {
+    return this.httpClient.get<Torneo>(this.ROOT_URL + 'torneos/' + id)
+  }
+
+  //Método que obtiene una partida específica en forma de observable, que luego se procesa donde llega.
+  getJugador(id: Number): Observable<Jugador> {
+    return this.httpClient.get<Jugador>(this.ROOT_URL + 'jugadores/' + id)
   }
 
 
-
+  //Metodo que obtiene todas las partidas en un array.
   getPartidas(): Array<Partida> {
-    return [
+    let partidas: Array<Partida> = []
 
-      {
-        id: 1,
-        nombre: "Partida guapa 1",
-        fecha: "2024-04-25",
-        torneo: {
-          id: 1,
-          nombre: "Torneo por defecto 1",
-          fechaInicio: "2024-04-25",
-          fechaFinal: "2024-04-25"
+    this.httpClient.get<Array<Partida>>(this.ROOT_URL + 'partidas').subscribe((partidasBack) => {
+      partidasBack.forEach((partida) => {
+        partidas.push(partida)
+      })
+    })
 
-        }
-      },
-
-      {
-        id: 2,
-        nombre: "Partida guapa 2",
-        fecha: "2024-04-25",
-        torneo: {
-          id: 1,
-          nombre: "Torneo por defecto 2",
-          fechaInicio: "2024-04-25",
-          fechaFinal: "2024-04-25"
-
-        }
-      },
-
-      {
-        id: 3,
-        nombre: "Partida guapa 3",
-        fecha: "2024-04-25",
-        torneo: {
-          id: 1,
-          nombre: "Torneo por defecto 3",
-          fechaInicio: "2024-04-25",
-          fechaFinal: "2024-04-25"
-
-        }
-      },
-
-      {
-        id: 4,
-        nombre: "Partida guapa 4",
-        fecha: "2024-04-25",
-        torneo: {
-          id: 1,
-          nombre: "Torneo por defecto 4",
-          fechaInicio: "2024-04-25",
-          fechaFinal: "2024-04-25"
-
-        }
-      },
-
-    ]
+    return partidas
   }
 
+  //Metodo que obtiene todos los torneos en un array.
   getTorneos(): Array<Torneo> {
-    let torneos: Array<Torneo> =
-      [
-        {
-          id: 1,
-          nombre: "Torneo Victor",
-          fechaInicio: '2024-04-25',
-          fechaFinal: '2025-04-25'
-        },
-        {
-          id: 2,
-          nombre: "Torneo Peteters",
-          fechaInicio: '2024-08-15',
-          fechaFinal: '2025-09-27'
-        },
-        {
-          id: 3,
-          nombre: "Torneo Galo",
-          fechaInicio: '2024-08-05',
-          fechaFinal: '2025-02-09'
-        },
-        {
-          id: 4,
-          nombre: "Torneo Pepa",
-          fechaInicio: '2024-01-25',
-          fechaFinal: '2025-01-25'
-        },
-      ]
+
+    let torneos: Array<Torneo> = []
+
+    this.httpClient.get<Array<Torneo>>(this.ROOT_URL + 'torneos').subscribe((torneosBack) => {
+      torneosBack.forEach((torneo) => {
+        torneos.push(torneo)
+      })
+    })
 
 
     return torneos
@@ -122,50 +62,21 @@ export class AdminService {
 
   }
 
-  getTorneo(id: Number): Torneo {
-    return {
-      id: 1,
-      nombre: "Torneo Victor",
-      fechaInicio: '2024-04-25',
-      fechaFinal: '2025-04-25'
-    }
-  }
-
+  //Metodo que obtiene todos los jugadores en un array.
   getJugadores(): Array<Jugador> {
-    let jugadores: Array<Jugador> = [
-      {
-        id: 1,
-        nombre: 'Vittorio',
-        apellidos: 'Lucchino',
-        username: 'turbrecher'
-      },
+    let jugadores: Array<Jugador> = []
 
-      {
-        id: 2,
-        nombre: 'Alberto',
-        apellidos: 'Coronel',
-        username: 'hittox03'
-      },
+    this.httpClient.get<Array<Jugador>>(this.ROOT_URL + 'jugadores').subscribe((jugadoresBack) => {
+      jugadoresBack.forEach((jugador) => {
+        jugadores.push(jugador)
+      })
+    })
 
-      {
-        id: 3,
-        nombre: 'Luis',
-        apellidos: 'González',
-        username: 'luisito'
-      },
-    ]
 
     return jugadores
   }
 
-  getJugador(id: Number): Jugador {
-    return {
-      id: 1,
-      nombre: "Mariangeles",
-      apellidos: "Coronel Morgado",
-      username: "Peteters"
-    }
-  }
+ 
 
 
 }

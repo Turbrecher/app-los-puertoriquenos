@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AdminService } from '../../../admin.service';
 import { Torneo } from '../../../../shared/models/torneo';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-form-edit-torneo',
@@ -29,15 +31,19 @@ export class FormEditTorneoComponent {
     return this.formTorneo.get("fechaFinal") as FormControl
   }
 
-  constructor(private fb: FormBuilder, private adminService:AdminService) {
-    
+  constructor(private fb: FormBuilder, private adminService: AdminService, private activatedRoute:ActivatedRoute) {
+
   }
 
-  ngOnInit(){
-    let torneo:Torneo = this.adminService.getTorneo(1)
-    this.nombre.setValue(torneo.nombre)
-    this.fechaInicio.setValue(torneo.fechaInicio)
-    this.fechaFinal.setValue(torneo.fechaFinal)
+  ngOnInit() {
+    let id = this.activatedRoute.snapshot.params['id']
+    let torneo: Observable<Torneo> = this.adminService.getTorneo(id)
+
+    torneo.subscribe((torneo) => {
+      this.nombre.setValue(torneo.nombre)
+      this.fechaInicio.setValue(torneo.fechaInicio)
+      this.fechaFinal.setValue(torneo.fechaFinal)
+    })
   }
 
   editarTorneo() {

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TarjetaTorneoComponent } from '../../../components/list/tarjeta-torneo/tarjeta-torneo.component';
 import { Torneo } from '../../../../shared/models/torneo';
 import { AdminService } from '../../../admin.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'admin-torneos-list',

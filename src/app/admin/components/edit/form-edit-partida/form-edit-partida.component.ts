@@ -2,6 +2,9 @@ import { Component, Input } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Torneo } from '../../../../shared/models/torneo';
 import { AdminService } from '../../../admin.service';
+import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/internal/Observable';
+import { Partida } from '../../../../shared/models/partida';
 
 @Component({
   selector: 'app-form-edit-partida',
@@ -50,14 +53,18 @@ export class FormEditPartidaComponent {
   }
 
 
-  constructor(private fb: FormBuilder, private adminService:AdminService) {
+  constructor(private fb: FormBuilder, private adminService: AdminService, private activatedRoute: ActivatedRoute) {
 
   }
 
   ngOnInit() {
-    let partida = this.adminService.getPartida(1)
-    this.nombre.setValue(partida.nombre)
-    this.fecha.setValue(partida.fecha)
-    this.torneosSelect.setValue(partida.torneo.id)
+    let id = this.activatedRoute.snapshot.params['id']
+    let partida: Observable<Partida> = this.adminService.getPartida(id)
+
+    partida.subscribe((partida) => {
+      this.nombre.setValue(partida.nombre)
+      this.fecha.setValue(partida.fecha)
+      this.torneosSelect.setValue(partida.torneo.id)
+    })
   }
 }
