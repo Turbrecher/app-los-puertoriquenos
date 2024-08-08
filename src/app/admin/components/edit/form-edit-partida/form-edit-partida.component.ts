@@ -15,7 +15,7 @@ import { Partida } from '../../../../shared/models/partida';
 })
 export class FormEditPartidaComponent {
   @Input() torneos: Array<Torneo> = []
-
+  
   formPartida: FormGroup = this.fb.group({
     "nombre": ["", [Validators.required, Validators.pattern(/[A-Za-z]{1,30}/)]],
     "fecha": ["", [Validators.required]],
@@ -49,7 +49,14 @@ export class FormEditPartidaComponent {
       return
     }
 
-    alert("Todo es válido")
+    //EDITAMOS LA PARTIDA CON LOS VALORES NUEVOS.
+    let id = this.activatedRoute.snapshot.params['id']
+    let nombre = this.nombre.value
+    let fecha = this.fecha.value
+    let torneosSelect = this.torneosSelect
+    let partida:Partida = {"id":id,"nombre": nombre, "fecha":fecha, "torneo":torneosSelect.value}
+
+    this.adminService.editPartida(partida)
   }
 
 
@@ -61,6 +68,7 @@ export class FormEditPartidaComponent {
     let id = this.activatedRoute.snapshot.params['id']
     let partida: Observable<Partida> = this.adminService.getPartida(id)
 
+    
     partida.subscribe((partida) => {
       this.nombre.setValue(partida.nombre)
       this.fecha.setValue(partida.fecha)

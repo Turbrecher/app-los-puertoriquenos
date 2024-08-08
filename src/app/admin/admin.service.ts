@@ -76,7 +76,21 @@ export class AdminService {
     return jugadores
   }
 
- 
+
+  editPartida(partida: Partida): Boolean {
+    console.log(partida)
+    let headers = {"Authorization":"token e4cd442570e51923aca5a8fa7542b58f5f406e46"}
+
+    this.httpClient.put<Partida>(this.ROOT_URL + 'partidas/' + partida.id, partida, {headers})
+    .subscribe(()=>{
+      alert("nice")
+      alert("partida editada!")
+    })
+
+    return true
+  }
+
+
 
 
 }
