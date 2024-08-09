@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Torneo } from '../../../../shared/models/torneo';
 import { RouterLink } from '@angular/router';
+import { AdminService } from '../../../admin.service';
 
 @Component({
   selector: 'app-tarjeta-torneo',
@@ -15,7 +16,13 @@ export class TarjetaTorneoComponent {
   @Input() fechaInicio: String = "1970-01-01"
   @Input() fechaFinal: String = "1970-01-01"
 
-  constructor() {
+  constructor(private adminService: AdminService) {
+  }
+
+  deleteTorneo(id: Number) {
+    if (confirm("¿Estás seguro?")) { 
+      this.adminService.deleteTorneo(id) 
+    }
   }
 
   ngOnInit() {

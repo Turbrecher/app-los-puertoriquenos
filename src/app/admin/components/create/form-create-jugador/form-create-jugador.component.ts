@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AdminService } from '../../../admin.service';
+import { Jugador } from '../../../../shared/models/jugador';
 
 @Component({
   selector: 'app-form-create-jugador',
@@ -28,7 +30,7 @@ export class FormCreateJugadorComponent {
     return this.formJugador.get("username") as FormControl
   }
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private adminService: AdminService) {
 
   }
 
@@ -50,6 +52,12 @@ export class FormCreateJugadorComponent {
     }
 
 
-    alert("Todo va perfecto")
+    //CREAMOS EL JUGADOR CON LOS VALORES NUEVOS.
+    let nombre = this.nombre.value
+    let apellidos = this.apellidos.value
+    let username = this.username.value
+    let jugador: Jugador = { "id": 0, "nombre": nombre, "apellidos": apellidos, "username": username }
+
+    this.adminService.createJugador(jugador)
   }
 }

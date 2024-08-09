@@ -5,15 +5,22 @@ import { Jugador } from '../shared/models/jugador';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { catchError } from 'rxjs';
+import { RedirectCommand, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
 
+  private token: String = "e4cd442570e51923aca5a8fa7542b58f5f406e46"
   private readonly ROOT_URL = 'http://localhost:8000/api/'
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private router: Router) { }
 
+  //DETALLES
+  //DETALLES
+  //DETALLES
+  //DETALLES
 
   //Método que obtiene una partida específica en forma de observable, que luego se procesa donde llega.
   getPartida(id: Number): Observable<Partida> {
@@ -30,6 +37,14 @@ export class AdminService {
     return this.httpClient.get<Jugador>(this.ROOT_URL + 'jugadores/' + id)
   }
 
+
+
+
+
+  //LISTAR
+  //LISTAR
+  //LISTAR
+  //LISTAR
 
   //Metodo que obtiene todas las partidas en un array.
   getPartidas(): Array<Partida> {
@@ -77,20 +92,154 @@ export class AdminService {
   }
 
 
-  editPartida(partida: Partida): Boolean {
-    console.log(partida)
-    let headers = {"Authorization":"token e4cd442570e51923aca5a8fa7542b58f5f406e46"}
 
-    this.httpClient.put<Partida>(this.ROOT_URL + 'partidas/' + partida.id, partida, {headers})
-    .subscribe(()=>{
-      alert("nice")
-      alert("partida editada!")
-    })
+
+
+  //EDICION
+  //EDICION
+  //EDICION
+  //EDICION
+
+  //Metodo que edita una partida
+  editPartida(partida: Partida): Boolean {
+    let headers = { "Authorization": "token " + this.token }
+
+    this.httpClient.put<Partida>(this.ROOT_URL + 'partidas/' + partida.id, partida, { headers })
+      .subscribe(() => {
+
+        this.router.navigate(["/admin/listgames"])
+
+      })
+
+    return true
+  }
+
+  editTorneo(torneo: Torneo): Boolean {
+    let headers = { "Authorization": "token " + this.token }
+
+    this.httpClient.put<Torneo>(this.ROOT_URL + 'torneos/' + torneo.id, torneo, { headers })
+      .subscribe(() => {
+
+        this.router.navigate(["/admin/listtournaments"])
+
+      })
+
+    return true
+  }
+
+  editJugador(jugador: Jugador): Boolean {
+    let headers = { "Authorization": "token " + this.token }
+
+    this.httpClient.put<Jugador>(this.ROOT_URL + 'jugadores/' + jugador.id, jugador, { headers })
+      .subscribe(() => {
+
+        this.router.navigate(["/admin/listplayers"])
+
+      })
 
     return true
   }
 
 
 
+
+
+  //CREACION
+  //CREACION
+  //CREACION
+  //CREACION
+
+  //Metodo que crea una partida
+  createPartida(partida: Partida): Boolean {
+    let headers = { "Authorization": "token " + this.token }
+
+    this.httpClient.post<Partida>(this.ROOT_URL + 'partidas/', partida, { headers })
+      .subscribe(() => {
+
+        this.router.navigate(["/admin/listgames"])
+
+      })
+
+    return true
+  }
+
+  //Metodo que crea un torneo
+  createTorneo(torneo: Torneo): Boolean {
+    let headers = { "Authorization": "token " + this.token }
+
+    this.httpClient.post<Torneo>(this.ROOT_URL + 'torneos/', torneo, { headers })
+      .subscribe(() => {
+
+        this.router.navigate(["/admin/listtournaments"])
+
+      })
+
+    return true
+  }
+
+  //Metodo que crea un jugador
+  createJugador(jugador: Jugador): Boolean {
+    let headers = { "Authorization": "token " + this.token }
+
+    this.httpClient.post<Jugador>(this.ROOT_URL + 'jugadores/', jugador, { headers })
+      .subscribe(() => {
+
+        this.router.navigate(["/admin/listplayers"])
+
+      })
+
+    return true
+  }
+
+
+
+
+
+  //BORRADO
+  //BORRADO
+  //BORRADO
+  //BORRADO
+
+  deletePartida(id:Number):Boolean{
+    let headers = { "Authorization": "token " + this.token }
+
+    this.httpClient.delete<Partida>(this.ROOT_URL + 'partidas/' + id,{ headers })
+    .subscribe(() => {
+
+      this.router.navigate(["/admin/listgames"])
+
+    })
+
+
+    return true
+  }
+
+  deleteTorneo(id:Number):Boolean{
+    let headers = { "Authorization": "token " + this.token }
+
+    this.httpClient.delete<Torneo>(this.ROOT_URL + 'torneos/' + id,{ headers })
+    .subscribe(() => {
+
+      this.router.navigate(["/admin/listtournaments"])
+
+    })
+
+
+    return true
+  }
+
+  deleteJugador(id:Number):Boolean{
+    let headers = { "Authorization": "token " + this.token }
+
+    this.httpClient.delete<Jugador>(this.ROOT_URL + 'jugadores/' + id,{ headers })
+    .subscribe(() => {
+
+      this.router.navigate(["/admin/listplayers"])
+
+    })
+
+
+    return true
+  }
 
 }

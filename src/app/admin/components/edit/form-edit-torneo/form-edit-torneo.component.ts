@@ -52,6 +52,13 @@ export class FormEditTorneoComponent {
     if (this.fechaInicio.invalid) { return }
     if (this.fechaFinal.invalid) { return }
 
-    alert("Torneo creado!")
+    //EDITAMOS EL TORNEO CON LOS VALORES NUEVOS.
+    let id = this.activatedRoute.snapshot.params['id']
+    let nombre = this.nombre.value
+    let fechaInicio = this.fechaInicio.value
+    let fechaFinal = this.fechaFinal.value
+    let torneo:Torneo = {"id":id,"nombre": nombre, "fechaInicio":fechaInicio, "fechaFinal":fechaFinal}
+
+    this.adminService.editTorneo(torneo)
   }
 }

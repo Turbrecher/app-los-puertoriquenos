@@ -41,7 +41,7 @@ export class FormEditJugadorComponent {
   ngOnInit() {
     let id = this.activatedRoute.snapshot.params['id']
     let jugador: Observable<Jugador> = this.adminService.getJugador(id)
-    
+
     jugador.subscribe((jugador) => {
       this.nombre.setValue(jugador.nombre)
       this.apellidos.setValue(jugador.apellidos)
@@ -69,7 +69,14 @@ export class FormEditJugadorComponent {
     }
 
 
-    alert("Todo va perfecto")
+    //EDITAMOS EL JUGADOR CON LOS VALORES NUEVOS.
+    let id = this.activatedRoute.snapshot.params['id']
+    let nombre = this.nombre.value
+    let apellidos = this.apellidos.value
+    let username = this.username.value
+    let jugador: Jugador = { "id": id, "nombre": nombre, "apellidos": apellidos, "username": username }
+
+    this.adminService.editJugador(jugador)
   }
 
 }

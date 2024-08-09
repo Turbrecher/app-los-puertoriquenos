@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Torneo } from '../../../../shared/models/torneo';
+import { AdminService } from '../../../admin.service';
 
 @Component({
   selector: 'app-form-create-torneo',
@@ -28,7 +30,7 @@ export class FormCreateTorneoComponent {
     return this.formTorneo.get("fechaFinal") as FormControl
   }
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private adminService:AdminService) {
 
   }
 
@@ -38,6 +40,12 @@ export class FormCreateTorneoComponent {
     if(this.fechaInicio.invalid){return}
     if(this.fechaFinal.invalid){return}
 
-    alert("Torneo creado!")
+    //CREAMOS EL TORNEO CON LOS VALORES NUEVOS.
+    let nombre = this.nombre.value
+    let fechaInicio = this.fechaInicio.value
+    let fechaFinal = this.fechaFinal.value
+    let torneo:Torneo = {"id":0,"nombre": nombre, "fechaInicio":fechaInicio, "fechaFinal":fechaFinal}
+
+    this.adminService.createTorneo(torneo)
   }
 }

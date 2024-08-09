@@ -3,5 +3,5 @@
     <h3>Fecha: {{fecha}}</h3>
     <h3>Torneo: {{torneo.nombre}}</h3>
     <a routerLink = "/admin/editgame/{{id}}">Detalles</a>
-    <a>Eliminar</a>
+    <a (click)="deletePartida(id)">Eliminar</a>
 </section>

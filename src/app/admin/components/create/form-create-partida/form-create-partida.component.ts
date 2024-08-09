@@ -1,6 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Torneo } from '../../../../shared/models/torneo';
 import { FormControl, FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Partida } from '../../../../shared/models/partida';
+import { AdminService } from '../../../admin.service';
 
 @Component({
   selector: 'app-form-create-partida',
@@ -45,11 +47,17 @@ export class FormCreatePartidaComponent {
       return
     }
 
-    alert("Todo es válido")
+    //CREAMOS LA PARTIDA CON LOS VALORES NUEVOS.
+    let nombre = this.nombre.value
+    let fecha = this.fecha.value
+    let torneosSelect = this.torneosSelect
+    let partida:Partida = {"id":0,"nombre": nombre, "fecha":fecha, "torneo":torneosSelect.value}
+
+    this.adminService.createPartida(partida)
   }
 
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private adminService:AdminService) {
 
   }
 

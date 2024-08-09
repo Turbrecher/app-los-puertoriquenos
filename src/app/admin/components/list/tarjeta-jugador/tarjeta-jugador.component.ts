@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { AdminService } from '../../../admin.service';
 
 @Component({
   selector: 'app-tarjeta-jugador',
@@ -13,6 +14,20 @@ export class TarjetaJugadorComponent {
   @Input() apellidos:String = "Apellidos por defecto"
   @Input() username:String = "Username por defecto"
   @Input() id:Number = 1
+  @Output("recargarJugadores") recargarJugadores :EventEmitter<any> = new EventEmitter() 
 
-  
+  constructor(private adminService:AdminService){
+
+  }
+
+  recargar(){
+    this.recargarJugadores.emit()
+  }
+
+  deleteJugador(id:Number){
+    if(confirm("¿Estas seguro?")){
+      this.adminService.deleteJugador(id)
+    }
+    
+  }
 }

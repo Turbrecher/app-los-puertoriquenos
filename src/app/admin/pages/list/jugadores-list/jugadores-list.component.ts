@@ -21,4 +21,9 @@ export class JugadoresListComponent {
     this.jugadores = this.adminService.getJugadores()
   }
 
+  recargarJugadores(){
+    alert("ejecutado")
+    this.jugadores = this.adminService.getJugadores()
+  }
+
 }
