@@ -70,10 +70,24 @@ export class FormCreatePartidaComponent {
       return
     }
 
-    for (let index = 1; index < this.nJugadores.length+1; index++) {
-      let jugadores: Array<Number> = []
-      jugadores.push((this.formPartida.get("participante"+index) as FormControl).value)
-      //SEGUIR POR AQUI
+    let jugadores: Array<Number> = []
+    //AGREGAMOS TODOS LOS JUGADORES QUE ESTAN APUNTADOS A UN ARRAY.
+    for (let index = 0; index < this.nJugadores.length; index++) {
+      let jugador = (this.formPartida.get("participante" + (index + 1)) as FormControl).value
+
+      //COMPROBAMOS SI FALTA POR RELLENAR ALGUN JUGADOR.
+      if(jugador == "") {
+        alert("Debe insertar todos los jugadores que han jugado")
+        return 
+      }
+
+      jugadores.push(jugador)
+    }
+
+    //COMPROBAMOS SI SE REPITEN JUGADORES, NO DEJANDO SEGUIR EN CASO AFIRMATIVO.
+    if(this.seRepiteValor(jugadores)){
+      alert("No se pueden repetir jugadores")
+      return
     }
 
     //CREAMOS LA PARTIDA CON LOS VALORES NUEVOS.
@@ -82,7 +96,16 @@ export class FormCreatePartidaComponent {
     let torneosSelect = this.torneosSelect
     let partida: Partida = { "id": 0, "nombre": nombre, "fecha": fecha, "torneo": torneosSelect.value }
 
-    this.adminService.createPartida(partida)
+    let json = this.adminService.createPartida(partida)
+
+    //POR CADA JUGADOR, AGREGAMOS SU PARTICIPACION
+    let puntuacionMaxima = jugadores.length
+    let puntuacionJugador = puntuacionMaxima
+    jugadores.forEach((idJugador)=>{
+
+     
+      puntuacionJugador--
+    })
   }
 
 
@@ -92,5 +115,31 @@ export class FormCreatePartidaComponent {
 
   ngOnInit() {
     this.jugadores = this.adminService.getJugadores()
+  }
+
+
+  //Funcion que comprueba si se repite algun valor de un array numerico
+  seRepiteValor(array:Array<Number>):Boolean{
+    let ocurrencias = 0
+    let seRepite = false
+
+    array.forEach((idJugador) => {
+      array.forEach((idJugadorX) => {
+
+        if (idJugador == idJugadorX) {
+          ocurrencias++
+        }
+
+        if (ocurrencias > 1) {
+          seRepite = true
+        }
+
+      })
+
+      ocurrencias = 0
+    })
+
+
+    return seRepite
   }
 }

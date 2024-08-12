@@ -81,11 +81,12 @@ export class AdminService {
   getJugadores(): Array<Jugador> {
     let jugadores: Array<Jugador> = []
 
-    this.httpClient.get<Array<Jugador>>(this.ROOT_URL + 'jugadores').subscribe((jugadoresBack) => {
-      jugadoresBack.forEach((jugador) => {
-        jugadores.push(jugador)
+    this.httpClient.get<Array<Jugador>>(this.ROOT_URL + 'jugadores').
+      subscribe((jugadoresBack) => {
+        jugadoresBack.forEach((jugador) => {
+          jugadores.push(jugador)
+        })
       })
-    })
 
 
     return jugadores
@@ -150,17 +151,16 @@ export class AdminService {
   //CREACION
 
   //Metodo que crea una partida
-  async createPartida(partida: Partida): Promise<Boolean> {
+  createPartida(partida: Partida): Array<any> {
     let headers = { "Authorization": "token " + this.token }
+    let respuesta: Array<Number> = []
 
-    this.httpClient.post<Partida>(this.ROOT_URL + 'partidas/', partida, { headers })
-      .subscribe(() => {
-
-        this.router.navigate(["/admin/listgames"])
-
+    this.httpClient.post<any>(this.ROOT_URL + 'partidas/', partida, { headers })
+      .subscribe((json) => {
+        respuesta.push(json.id_partida)
       })
+      return respuesta
 
-    return true
   }
 
   //Metodo que crea un torneo
