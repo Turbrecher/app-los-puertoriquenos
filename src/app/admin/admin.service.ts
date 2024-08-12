@@ -151,16 +151,24 @@ export class AdminService {
   //CREACION
 
   //Metodo que crea una partida
-  createPartida(partida: Partida): Array<any> {
+  createPartida(partida: Partida): Observable<any> {
     let headers = { "Authorization": "token " + this.token }
-    let respuesta: Array<Number> = []
 
-    this.httpClient.post<any>(this.ROOT_URL + 'partidas/', partida, { headers })
-      .subscribe((json) => {
-        respuesta.push(json.id_partida)
-      })
-      return respuesta
+    return this.httpClient.post<any>(this.ROOT_URL + 'partidas/', partida, { headers })
+  }
 
+  createJugada(idJugador: Number, idPartida: Number, puntuacion:Number): Observable<any> {
+
+    let headers = { "Authorization": "token " + this.token }
+
+    let jugada = {
+      "jugador":idJugador,
+      "partida":idPartida,
+      "puntuacion":puntuacion
+    }
+
+
+    return this.httpClient.post<any>(this.ROOT_URL + 'jugadas/', jugada, { headers })
   }
 
   //Metodo que crea un torneo
@@ -242,6 +250,13 @@ export class AdminService {
 
 
     return true
+  }
+
+
+  deleteJugada(idJugada : Number): Observable<any>{
+    let headers = { "Authorization": "token " + this.token }
+
+    return this.httpClient.delete<any>(this.ROOT_URL + 'jugadas/' + idJugada, { headers })
   }
 
 }

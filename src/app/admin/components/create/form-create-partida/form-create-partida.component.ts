@@ -4,6 +4,7 @@ import { FormControl, FormBuilder, FormGroup, Validators, ReactiveFormsModule } 
 import { Partida } from '../../../../shared/models/partida';
 import { AdminService } from '../../../admin.service';
 import { Jugador } from '../../../../shared/models/jugador';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Component({
   selector: 'app-form-create-partida',
@@ -15,7 +16,10 @@ import { Jugador } from '../../../../shared/models/jugador';
 export class FormCreatePartidaComponent {
   @Input() torneos: Array<Torneo> = []
   nJugadores: Array<number> = []
+  idJugadores: Array<number> = []
   jugadores: Array<Jugador> = []
+  idPartida: Number = 0
+  partidaCreada: Boolean = false
 
   formPartida: FormGroup = this.fb.group({
     "nombre": ["", [Validators.required, Validators.pattern(/[A-Za-z]{1,30}/)]],
@@ -56,7 +60,7 @@ export class FormCreatePartidaComponent {
   }
 
   //Método que se ejecuta al pulsar en el boton crear partida.
-  crearPartida() {
+  async crearPartida() {
 
     if (this.nombre.invalid) {
       return
@@ -69,23 +73,21 @@ export class FormCreatePartidaComponent {
     if (this.torneosSelect.invalid) {
       return
     }
-
-    let jugadores: Array<Number> = []
     //AGREGAMOS TODOS LOS JUGADORES QUE ESTAN APUNTADOS A UN ARRAY.
     for (let index = 0; index < this.nJugadores.length; index++) {
       let jugador = (this.formPartida.get("participante" + (index + 1)) as FormControl).value
 
       //COMPROBAMOS SI FALTA POR RELLENAR ALGUN JUGADOR.
-      if(jugador == "") {
+      if (jugador == "") {
         alert("Debe insertar todos los jugadores que han jugado")
-        return 
+        return
       }
 
-      jugadores.push(jugador)
+      this.idJugadores.push(jugador)
     }
 
     //COMPROBAMOS SI SE REPITEN JUGADORES, NO DEJANDO SEGUIR EN CASO AFIRMATIVO.
-    if(this.seRepiteValor(jugadores)){
+    if (this.seRepiteValor(this.idJugadores)) {
       alert("No se pueden repetir jugadores")
       return
     }
@@ -93,17 +95,33 @@ export class FormCreatePartidaComponent {
     //CREAMOS LA PARTIDA CON LOS VALORES NUEVOS.
     let nombre = this.nombre.value
     let fecha = this.fecha.value
-    let torneosSelect = this.torneosSelect
-    let partida: Partida = { "id": 0, "nombre": nombre, "fecha": fecha, "torneo": torneosSelect.value }
+    let torneosSelect = this.torneosSelect.value
+    let partida: Partida = { "id": 0, "nombre": nombre, "fecha": fecha, "torneo": torneosSelect }
 
-    let json = this.adminService.createPartida(partida)
+    //Guardamos la id de la partida recien creada
+    this.adminService.createPartida(partida)
+      .subscribe((response) => {
+        this.idPartida = response.id_partida
+      })
 
+    this.partidaCreada = true
+
+  }
+
+
+  //Funcion que permite crear jugadas
+  crearJugadas() {
     //POR CADA JUGADOR, AGREGAMOS SU PARTICIPACION
-    let puntuacionMaxima = jugadores.length
+    let puntuacionMaxima = this.idJugadores.length
     let puntuacionJugador = puntuacionMaxima
-    jugadores.forEach((idJugador)=>{
+    this.idJugadores.forEach((idJugador) => {
 
-     
+      this.adminService.createJugada(idJugador, this.idPartida, puntuacionJugador)
+        .subscribe({
+          next: ()=> alert("un exito"),
+          error: ()=> alert("Un error")
+        })
+      //alert("jugada del jugador con id " + idJugador + " ha sido creada")
       puntuacionJugador--
     })
   }
@@ -119,7 +137,7 @@ export class FormCreatePartidaComponent {
 
 
   //Funcion que comprueba si se repite algun valor de un array numerico
-  seRepiteValor(array:Array<Number>):Boolean{
+  seRepiteValor(array: Array<Number>): Boolean {
     let ocurrencias = 0
     let seRepite = false
 

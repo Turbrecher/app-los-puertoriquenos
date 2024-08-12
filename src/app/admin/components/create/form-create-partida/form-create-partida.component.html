@@ -35,7 +35,7 @@
     </section>
 
     <section class="form_group">
-        <button [disabled]="formPartida.invalid" (click)="crearPartida()">CREAR</button>
+        <button [disabled]="formPartida.invalid || partidaCreada" (click)="crearPartida()">CREAR</button>
     </section>
 
 </form>
@@ -51,6 +51,14 @@
             }
         </select>
     </section>
+
+    
     }
 
+    <section class="form_group">
+        <button [disabled]="formPartida.invalid || !partidaCreada" (click)="crearJugadas()">CREAR</button>
+    </section>
+    
+
 </form>
+
