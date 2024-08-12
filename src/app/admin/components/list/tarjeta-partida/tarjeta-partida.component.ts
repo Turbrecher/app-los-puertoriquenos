@@ -30,9 +30,7 @@ export class TarjetaPartidaComponent {
   deletePartida(id:Number){
     if(confirm("¿Estas seguro?")){
       this.adminService.deletePartida(id)
-      
     }
-    
   }
 
 

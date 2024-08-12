@@ -101,7 +101,7 @@ export class AdminService {
   //EDICION
 
   //Metodo que edita una partida
-  editPartida(partida: Partida): Boolean {
+  async editPartida(partida: Partida): Promise<Boolean> {
     let headers = { "Authorization": "token " + this.token }
 
     this.httpClient.put<Partida>(this.ROOT_URL + 'partidas/' + partida.id, partida, { headers })
@@ -114,7 +114,7 @@ export class AdminService {
     return true
   }
 
-  editTorneo(torneo: Torneo): Boolean {
+  async editTorneo(torneo: Torneo): Promise<Boolean> {
     let headers = { "Authorization": "token " + this.token }
 
     this.httpClient.put<Torneo>(this.ROOT_URL + 'torneos/' + torneo.id, torneo, { headers })
@@ -127,7 +127,7 @@ export class AdminService {
     return true
   }
 
-  editJugador(jugador: Jugador): Boolean {
+  async editJugador(jugador: Jugador): Promise<Boolean> {
     let headers = { "Authorization": "token " + this.token }
 
     this.httpClient.put<Jugador>(this.ROOT_URL + 'jugadores/' + jugador.id, jugador, { headers })
@@ -150,7 +150,7 @@ export class AdminService {
   //CREACION
 
   //Metodo que crea una partida
-  createPartida(partida: Partida): Boolean {
+  async createPartida(partida: Partida): Promise<Boolean> {
     let headers = { "Authorization": "token " + this.token }
 
     this.httpClient.post<Partida>(this.ROOT_URL + 'partidas/', partida, { headers })
@@ -164,7 +164,7 @@ export class AdminService {
   }
 
   //Metodo que crea un torneo
-  createTorneo(torneo: Torneo): Boolean {
+  async createTorneo(torneo: Torneo): Promise<Boolean> {
     let headers = { "Authorization": "token " + this.token }
 
     this.httpClient.post<Torneo>(this.ROOT_URL + 'torneos/', torneo, { headers })
@@ -200,43 +200,45 @@ export class AdminService {
   //BORRADO
   //BORRADO
 
-  deletePartida(id:Number):Boolean{
+  async deletePartida(id: Number): Promise<Boolean> {
     let headers = { "Authorization": "token " + this.token }
 
-    this.httpClient.delete<Partida>(this.ROOT_URL + 'partidas/' + id,{ headers })
-    .subscribe(() => {
+    this.httpClient.delete<Partida>(this.ROOT_URL + 'partidas/' + id, { headers })
+      .subscribe(() => {
 
-      this.router.navigate(["/admin/listgames"])
+        this.router.navigate(["/admin/listgames"])
+        location.reload()
 
-    })
+      })
 
 
     return true
   }
 
-  deleteTorneo(id:Number):Boolean{
+  async deleteTorneo(id: Number): Promise<Boolean> {
     let headers = { "Authorization": "token " + this.token }
 
-    this.httpClient.delete<Torneo>(this.ROOT_URL + 'torneos/' + id,{ headers })
-    .subscribe(() => {
+    this.httpClient.delete<Torneo>(this.ROOT_URL + 'torneos/' + id, { headers })
+      .subscribe(() => {
+        this.router.navigate(["/admin/listtournaments"])
+        location.reload()
 
-      this.router.navigate(["/admin/listtournaments"])
-
-    })
+      })
 
 
     return true
   }
 
-  deleteJugador(id:Number):Boolean{
+  async deleteJugador(id: Number): Promise<Boolean> {
     let headers = { "Authorization": "token " + this.token }
 
-    this.httpClient.delete<Jugador>(this.ROOT_URL + 'jugadores/' + id,{ headers })
-    .subscribe(() => {
+    this.httpClient.delete<Jugador>(this.ROOT_URL + 'jugadores/' + id, { headers })
+      .subscribe(() => {
 
-      this.router.navigate(["/admin/listplayers"])
+        this.router.navigate(["/admin/listplayers"])
+        location.reload()
 
-    })
+      })
 
 
     return true

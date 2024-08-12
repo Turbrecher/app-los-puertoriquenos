@@ -14,14 +14,9 @@ export class TarjetaJugadorComponent {
   @Input() apellidos:String = "Apellidos por defecto"
   @Input() username:String = "Username por defecto"
   @Input() id:Number = 1
-  @Output("recargarJugadores") recargarJugadores :EventEmitter<any> = new EventEmitter() 
 
   constructor(private adminService:AdminService){
 
-  }
-
-  recargar(){
-    this.recargarJugadores.emit()
   }
 
   deleteJugador(id:Number){

@@ -1,4 +1,4 @@
-<form [formGroup]="formPartida"  class="create_partida">
+<form [formGroup]="formPartida" class="create_partida">
 
     <section class="form_group">
         <label>Nombre</label>
@@ -16,14 +16,41 @@
         <label>Torneo</label>
         <select formControlName="torneosSelect">
             @for (torneo of torneos; track torneos) {
-                <option value="{{torneo.id}}">{{torneo.nombre}}</option>
+            <option value="{{torneo.id}}">{{torneo.nombre}}</option>
             }
         </select>
         <section class="error" [hidden]="torneosSelect.valid || torneosSelect.pristine">Debe elegir un torneo</section>
     </section>
 
     <section class="form_group">
+        <label>Número Jugadores</label>
+        <select formControlName="nJugadoresSelect" (change)="establecerNumeroJugadores()">
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        <section class="error" [hidden]="nJugadoresSelect.valid || nJugadoresSelect.pristine">{{nJugadoresSelect.value}}
+        </section>
+    </section>
+
+    <section class="form_group">
         <button [disabled]="formPartida.invalid" (click)="crearPartida()">CREAR</button>
     </section>
+
+</form>
+
+<form [formGroup]="formPartida" class="nJugadores">
+
+    @for (item of nJugadores; track $index) {
+    <section class="form_group">
+        <label> {{$index + 1}}º puesto</label>
+        <select formControlName="participante{{$index+1}}" name="Jugadores" id="jugadores">
+            @for (jugador of jugadores; track $index) {
+                <option value="{{jugador.id}}">{{jugador.nombre}}</option>
+            }
+        </select>
+    </section>
+    }
 
 </form>
