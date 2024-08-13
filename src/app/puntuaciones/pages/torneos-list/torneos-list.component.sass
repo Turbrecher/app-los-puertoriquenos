@@ -4,7 +4,16 @@
     
 .torneos
     display: grid
-    grid-template-columns: 25% 25% 25%
     justify-content: center
     gap: 2rem
-    
+
+
+//PANTALLAS GRANDES
+@media (width>=992px)
+    .torneos
+        grid-template-columns: 25% 25% 25%
+
+//PANTALLAS PEQUEÑAS
+@media (width<992px)
+    .torneos
+        grid-template-columns: 80%

@@ -35,29 +35,34 @@
     </section>
 
     <section class="form_group">
-        <button [disabled]="formPartida.invalid || partidaCreada" (click)="crearPartida()">CREAR</button>
+        <button [disabled]="formPartida.invalid || partidaCreada" (click)="crearPartida()">CREAR PARTIDA</button>
     </section>
 
 </form>
 
-<form [formGroup]="formPartida" class="nJugadores">
+<form [formGroup]="formPartida" class="create_jugadas">
 
-    @for (item of nJugadores; track $index) {
-    <section class="form_group">
-        <label> {{$index + 1}}º puesto</label>
-        <select formControlName="participante{{$index+1}}" name="Jugadores" id="jugadores">
-            @for (jugador of jugadores; track $index) {
-                <option value="{{jugador.id}}">{{jugador.nombre}}</option>
+    <section class="participantes">
+        @for (item of nJugadores; track $index) {
+            <section class="form_group">
+                <label> {{$index + 1}}º puesto</label>
+                <select formControlName="participante{{$index+1}}" name="Jugadores" id="jugadores">
+                    @for (jugador of jugadores; track $index) {
+                        <option value="{{jugador.id}}">{{jugador.nombre}}</option>
+                    }
+                </select>
+            </section>
+        
+            
             }
-        </select>
+    </section>
+    
+
+    <section class="form_group btn_jugada">
+        <button [disabled]="formPartida.invalid || !partidaCreada" (click)="crearJugadas()">AGREGAR PUNTUACIONES</button>
     </section>
 
     
-    }
-
-    <section class="form_group">
-        <button [disabled]="formPartida.invalid || !partidaCreada" (click)="crearJugadas()">CREAR</button>
-    </section>
     
 
 </form>

@@ -5,15 +5,22 @@ section
     padding: 1rem
     row-gap: 1rem
     a
-        text-align: center
-        text-decoration: none
-        color: black
         background-image: url(/assets/images/repeating_vintage_paper.jpg) 
         border: solid black 2px
+        color: black
+        text-align: center
+        text-decoration: none
         padding: 0.5rem
-        width: 25%
         position: relative
         top: 0
         transition: top ease 0.25s
+        width: 25%
         &:hover
             top: -5px
+
+
+@media (width<992px)
+    section
+        a
+            width: 90%
+            margin: 0 auto

@@ -1,40 +1,80 @@
-.admin_page
-    display: grid
-    grid-template-columns: 20% 80%
-    justify-content: space-between
-    margin: 0 auto
-
-    /*.admin_content
-        
-
-    .admin_nav
-        border-right: solid black 2px
+//PANTALLAS GRANDES
+@media (width>992px)
+    .admin_page
         display: grid
-        min-height: 80rem
+        grid-template-columns: 20% 80%
+        justify-content: space-between
+        margin: 0 auto  
 
-        .create
-            border-bottom: solid black 2px
-        article
-            background-image: url(/assets/images/repeating_vintage_paper_2.jpg)
-            h1
-                font-size: 32px
-                text-align: center
+        .admin_nav
+            border-right: solid black 2px
+            display: grid
+            min-height: 80rem
+
+            .create
                 border-bottom: solid black 2px
-            
-            a
-                color: black
-                text-decoration: none
-                display: block
-                font-size: 32px
-                text-align: center
-                margin: 1rem 0
-                transition: scale ease 0.3s, left ease 0.3s, text-decoration ease 0.3s
-                position: relative
-                left: 0
-                &:hover
-                    scale: 110%
-                &.active
-                    left: 25px
-                    text-decoration: underline
+            article
+                background-image: url(/assets/images/repeating_vintage_paper_2.jpg)
+                h1
+                    font-size: 32px
+                    text-align: center
+                    border-bottom: solid black 2px
+                
+                a
+                    color: black
+                    text-decoration: none
+                    display: block
+                    font-size: 32px
+                    text-align: center
+                    margin: 1rem 0
+                    transition: scale ease 0.3s, left ease 0.3s, text-decoration ease 0.3s
+                    position: relative
+                    left: 0
+                    &:hover
+                        scale: 110%
+                    &.active
+                        left: 25px
+                        text-decoration: underline
+
+//PANTALLAS PEQUEÑAS
+@media (width<992px)
+    .admin_page
+        margin: 0 auto  
+        display: grid
+        row-gap: 2rem
+
+        .admin_nav
+            border-right: solid black 2px
+            display: grid
+            padding-top: 1rem
+
+            .create, .list
+                border-bottom: solid black 2px
+                border-top: solid black 2px
+                margin-bottom: 1rem
+            article
+                background-image: url(/assets/images/repeating_vintage_paper_2.jpg)
+                h1
+                    font-size: 32px
+                    text-align: center
+                    border-bottom: solid black 2px
+                
+                a
+                    color: black
+                    text-decoration: none
+                    display: block
+                    font-size: 32px
+                    text-align: center
+                    margin: 1rem 0
+                    transition: scale ease 0.3s, left ease 0.3s, text-decoration ease 0.3s
+                    position: relative
+                    left: 0
+                    &:hover
+                        scale: 110%
+                    &.active
+                        left: 25px
+                        text-decoration: underline
+
+
                 
                 

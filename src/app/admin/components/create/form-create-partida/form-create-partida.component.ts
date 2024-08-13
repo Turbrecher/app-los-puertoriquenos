@@ -5,6 +5,7 @@ import { Partida } from '../../../../shared/models/partida';
 import { AdminService } from '../../../admin.service';
 import { Jugador } from '../../../../shared/models/jugador';
 import { Observable } from 'rxjs/internal/Observable';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-form-create-partida',
@@ -73,6 +74,7 @@ export class FormCreatePartidaComponent {
     if (this.torneosSelect.invalid) {
       return
     }
+
     //AGREGAMOS TODOS LOS JUGADORES QUE ESTAN APUNTADOS A UN ARRAY.
     for (let index = 0; index < this.nJugadores.length; index++) {
       let jugador = (this.formPartida.get("participante" + (index + 1)) as FormControl).value
@@ -80,6 +82,7 @@ export class FormCreatePartidaComponent {
       //COMPROBAMOS SI FALTA POR RELLENAR ALGUN JUGADOR.
       if (jugador == "") {
         alert("Debe insertar todos los jugadores que han jugado")
+        this.idJugadores = []
         return
       }
 
@@ -98,13 +101,14 @@ export class FormCreatePartidaComponent {
     let torneosSelect = this.torneosSelect.value
     let partida: Partida = { "id": 0, "nombre": nombre, "fecha": fecha, "torneo": torneosSelect }
 
-    //Guardamos la id de la partida recien creada
+    //Guardamos la id de la partida recien creada.
     this.adminService.createPartida(partida)
       .subscribe((response) => {
         this.idPartida = response.id_partida
       })
 
-    this.partidaCreada = true
+
+    this.partidaCreada = true//Esta variable, al activarse, desbloquea la opción de registrar las jugadas.
 
   }
 
@@ -114,20 +118,23 @@ export class FormCreatePartidaComponent {
     //POR CADA JUGADOR, AGREGAMOS SU PARTICIPACION
     let puntuacionMaxima = this.idJugadores.length
     let puntuacionJugador = puntuacionMaxima
+
     this.idJugadores.forEach((idJugador) => {
 
       this.adminService.createJugada(idJugador, this.idPartida, puntuacionJugador)
         .subscribe({
-          next: ()=> alert("un exito"),
-          error: ()=> alert("Un error")
+          next: () => { },
+          error: () => { }
         })
-      //alert("jugada del jugador con id " + idJugador + " ha sido creada")
       puntuacionJugador--
     })
+
+
+    this.router.navigate(["admin/listgames"])
   }
 
 
-  constructor(private fb: FormBuilder, private adminService: AdminService) {
+  constructor(private fb: FormBuilder, private adminService: AdminService, private router: Router) {
 
   }
 

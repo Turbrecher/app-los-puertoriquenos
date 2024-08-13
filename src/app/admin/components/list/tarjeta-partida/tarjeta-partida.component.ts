@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Torneo } from '../../../../shared/models/torneo';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AdminService } from '../../../admin.service';
 
 @Component({

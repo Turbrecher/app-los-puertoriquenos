@@ -1,3 +1,33 @@
+.form_group
+    display: grid
+    text-align: center
+    row-gap: 1rem
+    .error
+        color: red
+    input, select, option
+        background-image: url(/assets/images/repeating_vintage_paper.jpg)
+        border: solid black 2px
+        padding: 1rem
+        transition: top ease 0.33s
+        position: relative
+        top: 0
+        &:focus
+            padding: 1rem
+            border: solid transparent
+            top: -10px
+            outline: solid black 2px
+    button
+        background-image: url(/assets/images/repeating_vintage_paper.jpg)
+        border: solid black 2px
+        padding: 1rem
+        margin: 0 auto
+        position: relative
+        top: 0
+        transition: top ease 0.33s
+        width: 50%
+        &:hover
+            top: -5px
+
 .edit_jugador
     background-image: url(/assets/images/repeating_vintage_paper_2.jpg)
     border: solid black 2px
@@ -7,33 +37,15 @@
     justify-content: center
     row-gap: 2rem
     margin: 0 auto
+ 
+//PANTALLAS GRANDES
+@media (width>=992px) 
+    .edit_jugador
+        width: 50%
 
-    .form_group
-        display: grid
-        text-align: center
-        row-gap: 1rem
-        .error
-            color: red
-        input, select, option
-            background-image: url(/assets/images/repeating_vintage_paper.jpg)
-            border: solid black 2px
-            padding: 1rem
-            transition: top ease 0.33s
-            position: relative
-            top: 0
-            &:focus
-                padding: 1rem
-                border: solid transparent
-                top: -10px
-                outline: solid black 2px
-        button
-            background-image: url(/assets/images/repeating_vintage_paper.jpg)
-            border: solid black 2px
-            padding: 1rem
-            margin: 0 auto
-            position: relative
-            top: 0
-            transition: top ease 0.33s
-            width: 50%
-            &:hover
-                top: -5px
+
+//PANTALLAS PEQUEÑAS
+@media (width<992px) 
+    .edit_jugador
+        width: 80%
+        margin: 3rem auto
