@@ -1,1 +1,30 @@
-<p>torneos-detail works!</p>
+<article>
+
+    <section class="titulo">
+        <h1>PUNTUACIONES DEL TORNEO {{torneo.nombre}}</h1>
+    </section>
+
+
+    <section class="tablaPuntuaciones">
+        <table>
+
+            <thead>
+                <tr>
+                    <th>JUGADOR</th>
+                    <th>PUNTUACION</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @for (puntuacion of puntuacionesTorneo; track $index) {
+                    <tr>
+                        <td>{{puntuacion.username}}</td>
+                        <td>{{puntuacion.puntuacion}}</td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    </section>
+
+</article>
