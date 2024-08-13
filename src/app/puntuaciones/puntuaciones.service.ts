@@ -1,45 +1,30 @@
 import { Injectable } from '@angular/core';
 import { Torneo } from '../shared/models/torneo';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs/internal/Observable';
+import { Partida } from '../shared/models/partida';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PuntuacionesService {
 
-  constructor() { }
+  private readonly ROOT_URL = 'http://localhost:8000/api/'
+  constructor(private httpClient: HttpClient, private router: Router) {
+
+  }
 
 
-  getTorneos() {
-    let torneos : Array<Torneo> =
-      [
-        {
-          id: 1,
-          nombre: "Torneo Victor",
-          fechaInicio:'2024-04-25',
-          fechaFinal: '2025-04-25'
-        },
-        {
-          id: 2,
-          nombre: "Torneo Peteters",
-          fechaInicio:'2024-08-15',
-          fechaFinal: '2025-09-27'
-        },
-        {
-          id: 3,
-          nombre: "Torneo Galo",
-          fechaInicio:'2024-08-05',
-          fechaFinal: '2025-02-09'
-        },
-        {
-          id: 4,
-          nombre: "Torneo Pepa",
-          fechaInicio:'2024-01-25',
-          fechaFinal: '2025-01-25'
-        },
-      ]
+  getTorneos(): Observable<Array<Torneo>> {
 
+    return this.httpClient.get<Array<Torneo>>(this.ROOT_URL + "torneos")
 
-      return torneos
+  }
+
+  getPartidasTorneo(idTorneo: Number): Observable<Array<Partida>> {
+
+    return this.httpClient.get<Array<Partida>>(this.ROOT_URL + "partidas/?torneo=" + idTorneo)
 
   }
 }

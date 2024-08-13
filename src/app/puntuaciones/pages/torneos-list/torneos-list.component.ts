@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Torneo } from '../../../shared/models/torneo';
 import { PuntuacionesService } from '../../puntuaciones.service';
-import { TarjetaTorneoComponent  } from '../../components/tarjeta-torneo/tarjeta-torneo.component';
+import { TarjetaTorneoComponent } from '../../components/tarjeta-torneo/tarjeta-torneo.component';
 
 
 @Component({
@@ -12,13 +12,19 @@ import { TarjetaTorneoComponent  } from '../../components/tarjeta-torneo/tarjeta
   styleUrl: './torneos-list.component.sass'
 })
 export class TorneosListComponent {
-  torneos:Array<Torneo> = []
+  torneos: Array<Torneo> = []
 
-  constructor(public puntuacionesService:PuntuacionesService){
+  constructor(public puntuacionesService: PuntuacionesService) {
 
   }
 
-  ngOnInit(){
-    this.torneos = this.puntuacionesService.getTorneos()
+  ngOnInit() {
+    //Obtenemos los torneos a través del servicio de puntuaciones.
+    this.puntuacionesService.getTorneos()
+      .subscribe((torneos) => {
+        torneos.forEach((torneo) => {
+          this.torneos.push(torneo)
+        })
+      })
   }
 }

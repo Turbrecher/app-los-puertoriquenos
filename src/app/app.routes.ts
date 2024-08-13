@@ -9,11 +9,6 @@ export const routes: Routes = [
 
     {
         path: "",
-        loadChildren: () => import('./reglas/reglas.module').then(m => m.ReglasModule)
-    },
-
-    {
-        path: "",
         loadChildren: () => import('./puntuaciones/puntuaciones.module').then(m => m.PuntuacionesModule)
     },
 
