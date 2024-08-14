@@ -18,6 +18,11 @@ export class PartidasListComponent {
   }
 
   ngOnInit() {
-    this.partidas = this.adminService.getPartidas();
+    this.adminService.getPartidas()
+      .subscribe((partidas) => {
+        partidas.forEach((partida)=>{
+          this.partidas.push(partida)
+        })
+      });
   }
 }

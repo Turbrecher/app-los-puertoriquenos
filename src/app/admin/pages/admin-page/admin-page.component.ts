@@ -23,7 +23,6 @@ export class AdminPageComponent {
     }
 
     let token = this.cookieService.get('token')
-    console.log(token)
 
     this.adminService.profile(token)
       .subscribe({
@@ -33,7 +32,7 @@ export class AdminPageComponent {
 
         //En caso de error
         error: () => {
-          alert("El usuario autenticado no es administrador, así que no puede acceder a este recurso")
+          alert("Parece que el inicio de sesión no se ha realizado correctamente :S")
           this.router.navigate(['tournaments'])
         }
       })

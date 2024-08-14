@@ -4,9 +4,7 @@ import { Torneo } from '../shared/models/torneo';
 import { Jugador } from '../shared/models/jugador';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
-import { Subscription } from 'rxjs/internal/Subscription';
-import { catchError } from 'rxjs';
-import { RedirectCommand, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Usuario } from '../shared/models/Usuario';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -49,49 +47,24 @@ export class AdminService {
   //LISTAR
 
   //Metodo que obtiene todas las partidas en un array.
-  getPartidas(): Array<Partida> {
-    let partidas: Array<Partida> = []
+  getPartidas(): Observable<Array<Partida>> {
+    let headers = { "Authorization": "token " + this.token }
 
-    this.httpClient.get<Array<Partida>>(this.ROOT_URL + 'partidas').subscribe((partidasBack) => {
-      partidasBack.forEach((partida) => {
-        partidas.push(partida)
-      })
-    })
-
-    return partidas
+    return this.httpClient.get<Array<Partida>>(this.ROOT_URL + 'partidas', {headers})
   }
 
   //Metodo que obtiene todos los torneos en un array.
-  getTorneos(): Array<Torneo> {
+  getTorneos(): Observable<Array<Torneo>> {
+    let headers = { "Authorization": "token " + this.token }
 
-    let torneos: Array<Torneo> = []
-
-    this.httpClient.get<Array<Torneo>>(this.ROOT_URL + 'torneos').subscribe((torneosBack) => {
-      torneosBack.forEach((torneo) => {
-        torneos.push(torneo)
-      })
-    })
-
-
-    return torneos
-
-
-
+    return this.httpClient.get<Array<Torneo>>(this.ROOT_URL + 'torneos', { headers })
   }
 
   //Metodo que obtiene todos los jugadores en un array.
-  getJugadores(): Array<Jugador> {
-    let jugadores: Array<Jugador> = []
+  getJugadores(): Observable<Array<Jugador>> {
+    let headers = { "Authorization": "token " + this.token }
 
-    this.httpClient.get<Array<Jugador>>(this.ROOT_URL + 'jugadores').
-      subscribe((jugadoresBack) => {
-        jugadoresBack.forEach((jugador) => {
-          jugadores.push(jugador)
-        })
-      })
-
-
-    return jugadores
+    return this.httpClient.get<Array<Jugador>>(this.ROOT_URL + 'jugadores', { headers })
   }
 
 
@@ -269,9 +242,14 @@ export class AdminService {
   //LOGIN
   //LOGIN
   //LOGIN
+  
 
   login(usuario: Usuario) {
     return this.httpClient.post<any>(this.ROOT_URL + 'login', usuario)
+  }
+
+  register(usuario: Usuario) {
+    return this.httpClient.post<any>(this.ROOT_URL + 'register', usuario)
   }
 
   profile(token: String) {

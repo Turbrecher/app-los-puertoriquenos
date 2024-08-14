@@ -11,19 +11,18 @@ import { TarjetaJugadorComponent } from '../../../components/list/tarjeta-jugado
   styleUrl: './jugadores-list.component.sass'
 })
 export class JugadoresListComponent {
-  jugadores:Array<Jugador> = []
+  jugadores: Array<Jugador> = []
 
-  constructor(public adminService: AdminService){
+  constructor(public adminService: AdminService) {
 
   }
 
-  ngOnInit(){
-    this.jugadores = this.adminService.getJugadores()
-  }
-
-  recargarJugadores(){
-    alert("ejecutado")
-    this.jugadores = this.adminService.getJugadores()
+  ngOnInit() {
+    this.adminService.getJugadores().subscribe((jugadores) => {
+      jugadores.forEach((jugador) => {
+        this.jugadores.push(jugador)
+      })
+    })
   }
 
 }

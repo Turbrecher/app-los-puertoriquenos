@@ -6,28 +6,34 @@ import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-register',
   standalone: true,
   imports: [ReactiveFormsModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.sass'
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.sass'
 })
-export class LoginComponent {
+export class RegisterComponent {
 
-  formLogin: FormGroup = this.fb.group({
+
+  formRegister: FormGroup = this.fb.group({
     "username": ["", [Validators.required]],
     "password": ["", [Validators.required]],
+    "repeatPassword": ["", [Validators.required]],
   })
 
   errorLogin: String = ""
   tipoMensaje: String = "error"
 
   get username() {
-    return this.formLogin.get("username") as FormControl
+    return this.formRegister.get("username") as FormControl
   }
 
   get password() {
-    return this.formLogin.get("password") as FormControl
+    return this.formRegister.get("password") as FormControl
+  }
+
+  get repeatPassword() {
+    return this.formRegister.get("repeatPassword") as FormControl
   }
 
 
@@ -40,8 +46,17 @@ export class LoginComponent {
   }
 
 
-  login(event: Event) {
+  register(event: Event) {
     event.preventDefault()
+
+    if(this.password.value != this.repeatPassword.value){
+      this.tipoMensaje = "error"
+      this.errorLogin = "La contraseña y su repetición deben ser las mismas"
+
+      return
+    }
+
+
     let usuario: Usuario = {
       "username": this.username.value,
       "password": this.password.value
@@ -54,9 +69,10 @@ export class LoginComponent {
         //En caso de exito.
         next:
           (response) => {
+            console.log(response)
             this.cookieService.set('token', response.token)//Guardamos el token de usuario como cookie.
             this.tipoMensaje = "success"
-            this.errorLogin = "Inicio de sesión exitoso!."
+            this.errorLogin = "Registro exitoso!."
             location.href = "admin"
 
           },
@@ -65,12 +81,11 @@ export class LoginComponent {
           (error) => {
             this.cookieService.set('token', '', -1000)//Borramos cualquier token ante un fallo de login.
             this.tipoMensaje = "error"
-            this.errorLogin = "El inicio de sesión ha fallado, vuelve a intentarlo."
+            this.errorLogin = "El registro ha fallado, vuelve a intentarlo."
           },
       })
 
   }
-
 
 
 }

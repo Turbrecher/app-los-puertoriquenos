@@ -11,11 +11,16 @@ import { PartidasListComponent } from './pages/list/partidas-list/partidas-list.
 import { TorneosListComponent } from './pages/list/torneos-list/torneos-list.component';
 import { JugadoresListComponent } from './pages/list/jugadores-list/jugadores-list.component';
 import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 
 const routes: Routes = [
 
   {
     path: "login", component: LoginComponent,
+  },
+
+  {
+    path: "register", component: RegisterComponent,
   },
   {
 

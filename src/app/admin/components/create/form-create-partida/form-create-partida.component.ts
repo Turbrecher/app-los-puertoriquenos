@@ -139,7 +139,11 @@ export class FormCreatePartidaComponent {
   }
 
   ngOnInit() {
-    this.jugadores = this.adminService.getJugadores()
+    this.adminService.getJugadores().subscribe((jugadores) => {
+      jugadores.forEach((jugador) => {
+        this.jugadores.push(jugador)
+      })
+    })
   }
 
 

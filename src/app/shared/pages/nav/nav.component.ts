@@ -17,11 +17,15 @@ export class NavComponent {
 
   }
 
-  logout(event: Event) {
+  async logout(event: Event) {
     event.preventDefault()
 
     //Borramos el token
     this.cookieService.set('token', '', -1000)
+
+    //Retardo de 0.2 segundos para evitar bugs de persistencia de cookies.
+    await new Promise(f => setTimeout(f, 200));
+
     location.href = 'login'
   }
 

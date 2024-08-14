@@ -17,6 +17,10 @@ export class PartidasCreateComponent {
   }
 
   ngOnInit(){
-    this.torneos = this.adminService.getTorneos()
+    this.adminService.getTorneos().subscribe((torneos)=>{
+      torneos.forEach((torneo)=>{
+        this.torneos.push(torneo)
+      })
+    })
   }
 }

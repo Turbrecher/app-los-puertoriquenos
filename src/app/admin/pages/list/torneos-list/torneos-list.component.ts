@@ -18,8 +18,12 @@ export class TorneosListComponent {
 
   }
 
-  ngOnInit(){
-    this.torneos = this.adminService.getTorneos()
+  ngOnInit() {
+    this.adminService.getTorneos().subscribe((torneos) => {
+      torneos.forEach((torneo) => {
+        this.torneos.push(torneo)
+      })
+    })
   }
 
 }
