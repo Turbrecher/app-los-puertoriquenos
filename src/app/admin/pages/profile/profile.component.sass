@@ -1,0 +1,72 @@
+.error
+    color: red
+    text-align: center
+.success
+    color: green
+    text-align: center
+
+
+    
+//Estilos grupos de formulario.
+.form_group
+    display: grid
+    text-align: center
+    row-gap: 1rem
+    input, select, option
+        background-image: url(/assets/images/repeating_vintage_paper.jpg)
+        border: solid black 2px
+        padding: 1rem
+        transition: top ease 0.33s
+        position: relative
+        top: 0
+        &:focus
+            padding: 1rem
+            border: solid transparent
+            top: -10px
+            outline: solid black 2px
+    .delete
+        background: #ce2222aa
+        background-image: transparent
+        color: black
+        &:hover
+            scale: 110%
+    button
+        background-image: url(/assets/images/repeating_vintage_paper.jpg)
+        border: solid black 2px
+        padding: 1rem
+        margin: 0 auto
+        margin-top: 2rem
+        position: relative
+        top: 0
+        transition: top ease 0.33s, scale ease 0.33s
+        width: 30%
+        &:hover
+            top: -5px
+
+//Estilos generales formulario
+form
+    display: grid
+    row-gap: 2rem
+    background-image: url(/assets/images/repeating_vintage_paper_2.jpg)
+    border: solid black 2px
+    padding: 2rem
+    margin: 0 auto
+
+h1
+    text-align: center
+    padding: 2rem 0
+
+
+//Pantallas pequeñas
+@media (width <992px)
+    form
+        width: 80%
+        .form_group
+            button
+                width: 75%
+
+//Pantallas grandes
+@media (width >=992px)
+    form
+        width: 40%
+

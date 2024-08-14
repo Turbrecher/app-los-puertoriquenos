@@ -31,7 +31,7 @@ export class NavComponent {
 
   ngOnInit() {
     let token = this.cookieService.get('token')
-    this.adminService.profile(token)
+    this.adminService.profile()
       .subscribe({
         next: (response) => this.estaAutenticado = true,
         error: (error) => this.estaAutenticado = false

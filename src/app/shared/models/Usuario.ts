@@ -1,4 +1,5 @@
 export interface Usuario {
     username: String,
-    password: String
+    password: String,
+    email?:String
 }

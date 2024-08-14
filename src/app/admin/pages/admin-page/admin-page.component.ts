@@ -24,7 +24,7 @@ export class AdminPageComponent {
 
     let token = this.cookieService.get('token')
 
-    this.adminService.profile(token)
+    this.adminService.profile()
       .subscribe({
 
         //En caso de exito.

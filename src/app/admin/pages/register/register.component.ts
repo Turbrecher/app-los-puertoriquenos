@@ -69,7 +69,6 @@ export class RegisterComponent {
         //En caso de exito.
         next:
           (response) => {
-            console.log(response)
             this.cookieService.set('token', response.token)//Guardamos el token de usuario como cookie.
             this.tipoMensaje = "success"
             this.errorLogin = "Registro exitoso!."

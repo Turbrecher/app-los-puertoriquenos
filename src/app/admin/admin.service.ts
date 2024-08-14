@@ -252,9 +252,15 @@ export class AdminService {
     return this.httpClient.post<any>(this.ROOT_URL + 'register', usuario)
   }
 
-  profile(token: String) {
+  profile() {
     let headers = { "Authorization": "token " + this.token }
 
     return this.httpClient.post<any>(this.ROOT_URL + 'profile', {}, { headers })
+  }
+
+  editProfile(usuario:Usuario) {
+    let headers = { "Authorization": "token " + this.token }
+
+    return this.httpClient.post<any>(this.ROOT_URL + 'editprofile', usuario, { headers })
   }
 }

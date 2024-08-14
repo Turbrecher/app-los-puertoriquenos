@@ -49,7 +49,7 @@ export class LoginComponent {
     }
 
     //Servicio de administrador que hace login.
-    this.adminService.register(usuario)
+    this.adminService.login(usuario)
       .subscribe({
         //En caso de exito.
         next:
