@@ -10,9 +10,15 @@ import { PartidasEditComponent } from './pages/edit/partidas-edit/partidas-edit.
 import { PartidasListComponent } from './pages/list/partidas-list/partidas-list.component';
 import { TorneosListComponent } from './pages/list/torneos-list/torneos-list.component';
 import { JugadoresListComponent } from './pages/list/jugadores-list/jugadores-list.component';
+import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
+
   {
+    path: "login", component: LoginComponent,
+  },
+  {
+
     path: "admin", component: AdminPageComponent, children:
       [
         {
@@ -42,6 +48,7 @@ const routes: Routes = [
         {
           path: "listplayers", component: JugadoresListComponent
         },
+
       ]
   },
 

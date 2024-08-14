@@ -7,15 +7,17 @@ import { Observable } from 'rxjs/internal/Observable';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { catchError } from 'rxjs';
 import { RedirectCommand, Router } from '@angular/router';
+import { Usuario } from '../shared/models/Usuario';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
 
-  private token: String = "e4cd442570e51923aca5a8fa7542b58f5f406e46"
+  private token: String = this.cookieService.get('token')
   private readonly ROOT_URL = 'http://localhost:8000/api/'
-  constructor(private httpClient: HttpClient, private router: Router) { }
+  constructor(private httpClient: HttpClient, private router: Router, private cookieService: CookieService) { }
 
   //DETALLES
   //DETALLES
@@ -157,14 +159,14 @@ export class AdminService {
     return this.httpClient.post<any>(this.ROOT_URL + 'partidas/', partida, { headers })
   }
 
-  createJugada(idJugador: Number, idPartida: Number, puntuacion:Number): Observable<any> {
+  createJugada(idJugador: Number, idPartida: Number, puntuacion: Number): Observable<any> {
 
     let headers = { "Authorization": "token " + this.token }
 
     let jugada = {
-      "jugador":idJugador,
-      "partida":idPartida,
-      "puntuacion":puntuacion
+      "jugador": idJugador,
+      "partida": idPartida,
+      "puntuacion": puntuacion
     }
 
 
@@ -253,10 +255,28 @@ export class AdminService {
   }
 
 
-  deleteJugada(idJugada : Number): Observable<any>{
+  deleteJugada(idJugada: Number): Observable<any> {
     let headers = { "Authorization": "token " + this.token }
 
     return this.httpClient.delete<any>(this.ROOT_URL + 'jugadas/' + idJugada, { headers })
   }
 
+
+
+
+
+  //LOGIN
+  //LOGIN
+  //LOGIN
+  //LOGIN
+
+  login(usuario: Usuario) {
+    return this.httpClient.post<any>(this.ROOT_URL + 'login', usuario)
+  }
+
+  profile(token: String) {
+    let headers = { "Authorization": "token " + this.token }
+
+    return this.httpClient.post<any>(this.ROOT_URL + 'profile', {}, { headers })
+  }
 }

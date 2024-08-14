@@ -1,4 +1,12 @@
+@if (estaAutenticado) {
 <nav>
     <a routerLink="tournaments" routerLinkActive="active">Puntuaciones</a>
     <a routerLink="admin" routerLinkActive="active">Administrar</a>
+    <a (click)="logout($event)">Cerrar Sesión</a>
 </nav>
+}@else {
+<nav>
+    <a routerLink="tournaments" routerLinkActive="active">Puntuaciones</a>
+    <a routerLink="login" routerLinkActive="active">Iniciar Sesión</a>
+</nav>
+}
