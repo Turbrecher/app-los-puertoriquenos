@@ -26,7 +26,7 @@ export class NavComponent {
     //Retardo de 0.2 segundos para evitar bugs de persistencia de cookies.
     await new Promise(f => setTimeout(f, 200));
 
-    location.href = 'login'
+    location.href = ''
   }
 
   ngOnInit() {

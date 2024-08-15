@@ -40,12 +40,14 @@ export class FormEditJugadorComponent {
 
   ngOnInit() {
     let id = this.activatedRoute.snapshot.params['id']
-    let jugador: Observable<Jugador> = this.adminService.getJugador(id)
 
-    jugador.subscribe((jugador) => {
-      this.nombre.setValue(jugador.nombre)
-      this.apellidos.setValue(jugador.apellidos)
-      this.username.setValue(jugador.username)
+    this.adminService.getJugador(id).subscribe({
+      next: (jugador) => {
+        this.nombre.setValue(jugador.nombre)
+        this.apellidos.setValue(jugador.apellidos)
+        this.username.setValue(jugador.username)
+      },
+      error: (error) => console.log("Ha ocurrido un error, no hemos podido encontrar al usuario")
     })
 
 

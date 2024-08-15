@@ -24,17 +24,25 @@ export class AdminService {
 
   //Método que obtiene una partida específica en forma de observable, que luego se procesa donde llega.
   getPartida(id: Number): Observable<Partida> {
+    let headers = { "Authorization": "token " + this.token }
+
     return this.httpClient.get<Partida>(this.ROOT_URL + 'partidas/' + id)
   }
 
   //Método que obtiene una partida específica en forma de observable, que luego se procesa donde llega.
   getTorneo(id: Number): Observable<Torneo> {
+    let headers = { "Authorization": "token " + this.token }
+
     return this.httpClient.get<Torneo>(this.ROOT_URL + 'torneos/' + id)
   }
 
   //Método que obtiene una partida específica en forma de observable, que luego se procesa donde llega.
   getJugador(id: Number): Observable<Jugador> {
-    return this.httpClient.get<Jugador>(this.ROOT_URL + 'jugadores/' + id)
+    let headers = { "Authorization": "token " + this.token }
+    console.log(this.token)
+    console.log(this.ROOT_URL + 'jugadores/' + id)
+
+    return this.httpClient.get<Jugador>(this.ROOT_URL + 'jugadores/' + id, {headers})
   }
 
 

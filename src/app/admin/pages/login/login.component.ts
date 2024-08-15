@@ -57,7 +57,7 @@ export class LoginComponent {
             this.cookieService.set('token', response.token)//Guardamos el token de usuario como cookie.
             this.tipoMensaje = "success"
             this.errorLogin = "Inicio de sesión exitoso!."
-            location.href = "admin"
+            location.href = ""
 
           },
         //En caso de error.

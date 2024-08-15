@@ -32,7 +32,6 @@ export class TorneosListComponent {
 
 
           this.torneos.push(torneo)
-          console.log(torneo)
         })
       })
   }

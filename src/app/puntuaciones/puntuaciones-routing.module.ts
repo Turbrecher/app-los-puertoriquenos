@@ -6,18 +6,24 @@ import { PartidasDetailComponent } from './pages/partidas-detail/partidas-detail
 import { TorneosDetailComponent } from './pages/torneos-detail/torneos-detail.component';
 
 const routes: Routes = [
+  
   {
     path: "tournaments", component: TorneosListComponent
   }, 
+
   {
     path: "tournaments/:id/partidas", component: PartidasListComponent
   },
+
   {
     path: "tournaments/:id/puntuaciones", component: TorneosDetailComponent
   },
+
   {
     path: "games/:id/puntuaciones", component: PartidasDetailComponent
   },
+
+ 
    
 ];
 

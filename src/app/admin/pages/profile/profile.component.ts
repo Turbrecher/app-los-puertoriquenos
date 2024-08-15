@@ -99,7 +99,7 @@ export class ProfileComponent {
       .subscribe({
         next: () => {
           this.cookieService.delete('token')
-          location.href = "login"
+          location.href = ""
         },
         error: () => alert("Ha ocurrido un error, no se ha podido borrar el usuario.")
       })
