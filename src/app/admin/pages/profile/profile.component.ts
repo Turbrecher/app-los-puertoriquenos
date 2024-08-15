@@ -65,9 +65,9 @@ export class ProfileComponent {
       this.router.navigate(['login'])
     }
 
+    //Establecemos parametros del perfil en el formulario.
     this.adminService.profile()
       .subscribe((response) => {
-        console.log(response.data)
         this.usuario = response.data
         this.username = response.data.username
         this.email = response.data.email
@@ -79,7 +79,7 @@ export class ProfileComponent {
 
   }
 
-  deleteUser(event: Event) {
+  async deleteUser(event: Event) {
     event.preventDefault()
 
     if (!confirm("¿Estás seguro de que quieres borrar tu usuario?")) {
@@ -93,6 +93,16 @@ export class ProfileComponent {
     if (!confirm("¡NO HAY MARCHA ATRÁS!")) {
       return
     }
+
+
+    this.adminService.deleteUser()
+      .subscribe({
+        next: () => {
+          this.cookieService.delete('token')
+          location.href = "login"
+        },
+        error: () => alert("Ha ocurrido un error, no se ha podido borrar el usuario.")
+      })
 
 
   }

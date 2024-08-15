@@ -23,7 +23,16 @@ export class TorneosListComponent {
     this.puntuacionesService.getTorneos()
       .subscribe((torneos) => {
         torneos.forEach((torneo) => {
+
+          //Reemplazamos la id de usuario con su username
+          this.puntuacionesService.getUsername(Number(torneo.usuario))
+            .subscribe((usuario) => {
+              torneo.usuario = usuario.usuario
+            })
+
+
           this.torneos.push(torneo)
+          console.log(torneo)
         })
       })
   }

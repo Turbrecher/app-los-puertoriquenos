@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TorneosDetailComponent {
 
-  torneo: Torneo = { "id": 0, "nombre": "", "fechaInicio": "", fechaFinal: "" }
+  torneo: Torneo = { "id": 0, "nombre": "", "fechaInicio": "", "fechaFinal": "", "usuario":""}
   idTorneo: Number = 0
   puntuacionesTorneo: Array<Puntuacion> = []
 

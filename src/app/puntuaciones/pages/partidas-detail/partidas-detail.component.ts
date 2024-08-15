@@ -13,7 +13,7 @@ import { Partida } from '../../../shared/models/partida';
   styleUrl: './partidas-detail.component.sass'
 })
 export class PartidasDetailComponent {
-  partida: Partida = { id: 0, nombre: "", fecha: "", torneo: { "id": 0, "nombre": "", "fechaInicio": "", fechaFinal: "" } }
+  partida: Partida = { id: 0, nombre: "", fecha: "", torneo: { "id": 0, "nombre": "", "fechaInicio": "", "fechaFinal": "", "usuario":"" } }
   idPartida: Number = 0
   puntuacionesPartida: Array<Puntuacion> = []
 

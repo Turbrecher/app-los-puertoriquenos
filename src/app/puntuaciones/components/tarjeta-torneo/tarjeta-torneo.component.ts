@@ -12,8 +12,9 @@ import { RouterLink } from '@angular/router';
 export class TarjetaTorneoComponent {
   @Input() id:Number = 1
   @Input() nombre:String = ""
-  @Input() fechaInicio:String = "1970-01-01"
-  @Input() fechaFinal:String = "1970-01-01"
+  @Input() fechaInicio:String = ""
+  @Input() fechaFinal:String = ""
+  @Input() usuario?:String = ""
 
   constructor(){
   }

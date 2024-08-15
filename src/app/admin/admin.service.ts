@@ -50,7 +50,7 @@ export class AdminService {
   getPartidas(): Observable<Array<Partida>> {
     let headers = { "Authorization": "token " + this.token }
 
-    return this.httpClient.get<Array<Partida>>(this.ROOT_URL + 'partidas', {headers})
+    return this.httpClient.get<Array<Partida>>(this.ROOT_URL + 'partidas', { headers })
   }
 
   //Metodo que obtiene todos los torneos en un array.
@@ -242,7 +242,7 @@ export class AdminService {
   //LOGIN
   //LOGIN
   //LOGIN
-  
+
 
   login(usuario: Usuario) {
     return this.httpClient.post<any>(this.ROOT_URL + 'login', usuario)
@@ -258,9 +258,15 @@ export class AdminService {
     return this.httpClient.post<any>(this.ROOT_URL + 'profile', {}, { headers })
   }
 
-  editProfile(usuario:Usuario) {
+  editProfile(usuario: Usuario) {
     let headers = { "Authorization": "token " + this.token }
 
     return this.httpClient.post<any>(this.ROOT_URL + 'editprofile', usuario, { headers })
+  }
+
+  deleteUser() {
+    let headers = { "Authorization": "token " + this.token }
+
+    return this.httpClient.delete<any>(this.ROOT_URL + 'deleteuser', { headers })
   }
 }

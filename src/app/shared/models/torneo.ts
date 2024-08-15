@@ -3,4 +3,5 @@ export interface Torneo {
     nombre: String
     fechaInicio: String
     fechaFinal: String
+    usuario?:String
 }

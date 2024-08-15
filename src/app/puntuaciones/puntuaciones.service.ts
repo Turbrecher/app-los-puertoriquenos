@@ -58,4 +58,10 @@ export class PuntuacionesService {
   }
 
 
+
+  getUsername(idUsuario:Number): Observable<any>{
+    return this.httpClient.get<any>(this.ROOT_URL + "getusername/"+ idUsuario)
+  }
+
+
 }
