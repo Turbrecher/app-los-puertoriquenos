@@ -14,7 +14,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class AdminService {
 
   private token: String = this.cookieService.get('token')
-  private readonly ROOT_URL = 'https://app-los-puertoriquenos-api.onrender.com/'
+  private readonly ROOT_URL = 'https://app-los-puertoriquenos-api.onrender.com/api/'
   constructor(private httpClient: HttpClient, private router: Router, private cookieService: CookieService) { }
 
   //DETALLES
