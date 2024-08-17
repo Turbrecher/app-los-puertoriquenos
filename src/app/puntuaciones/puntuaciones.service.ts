@@ -12,7 +12,7 @@ import { Puntuacion } from '../shared/models/Puntuacion';
 })
 export class PuntuacionesService {
 
-  private readonly ROOT_URL = 'https://app-los-puertoriquenos-api.onrender.com/api/'
+  private readonly ROOT_URL = 'https://lospuertoriquenosapi.victorvera.es/api/'
   constructor(private httpClient: HttpClient, private router: Router) {
 
   }
