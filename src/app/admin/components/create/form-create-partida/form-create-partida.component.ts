@@ -32,6 +32,7 @@ export class FormCreatePartidaComponent {
     "participante3": [""],
     "participante4": [""],
     "participante5": [""],
+    "participante6": [""],
 
   })
 
@@ -116,17 +117,31 @@ export class FormCreatePartidaComponent {
   //Funcion que permite crear jugadas
   crearJugadas() {
     //POR CADA JUGADOR, AGREGAMOS SU PARTICIPACION
-    let puntuacionMaxima = this.idJugadores.length
+    let puntuacionMaxima = (this.idJugadores.length * 2)
     let puntuacionJugador = puntuacionMaxima
 
-    this.idJugadores.forEach((idJugador) => {
+    console.log(puntuacionMaxima)
 
-      this.adminService.createJugada(idJugador, this.idPartida, puntuacionJugador)
-        .subscribe({
-          next: () => { },
-          error: () => { }
-        })
-      puntuacionJugador--
+    this.idJugadores.forEach((idJugador) => {
+      if (puntuacionJugador == this.idJugadores.length * 2) {
+
+        this.adminService.createJugada(idJugador, this.idPartida, (puntuacionJugador + 1))
+          .subscribe({
+            next: () => { },
+            error: () => { }
+          })
+
+      } else {
+
+        this.adminService.createJugada(idJugador, this.idPartida, puntuacionJugador)
+          .subscribe({
+            next: () => { },
+            error: () => { }
+          })
+      }
+
+
+      puntuacionJugador -= 2
     })
 
 
