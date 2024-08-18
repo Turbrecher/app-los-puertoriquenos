@@ -49,7 +49,7 @@
                 <label> {{$index + 1}}º puesto</label>
                 <select formControlName="participante{{$index+1}}" name="Jugadores" id="jugadores">
                     @for (jugador of jugadores; track $index) {
-                        <option value="{{jugador.id}}">{{jugador.nombre}}</option>
+                        <option value="{{jugador.id}}">{{jugador.username}}</option>
                     }
                 </select>
             </section>
