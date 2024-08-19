@@ -94,6 +94,13 @@ export class FormCreatePartidaComponent {
         return
       }
 
+      //COMPROBAMOS SI FALTA POR RELLENAR ALGUN PUESTO.
+      if (puesto == ""){
+        alert("Debe insertar todos los puestos de los jugadores")
+        this.jugadoresYPuestos = []
+        return
+      }
+
       this.jugadoresYPuestos.push({ "jugador": jugador, "puesto": puesto })
     }
 
@@ -102,6 +109,7 @@ export class FormCreatePartidaComponent {
       alert("No se pueden repetir jugadores")
       return
     }
+
 
     //CREAMOS LA PARTIDA CON LOS VALORES NUEVOS.
     let nombre = this.nombre.value
@@ -179,6 +187,9 @@ export class FormCreatePartidaComponent {
       case "6":
         puntuacionJugador = puntuacionMaxima - 10
         break
+      default:
+        puntuacionJugador = 0
+        break;
     }
 
 
