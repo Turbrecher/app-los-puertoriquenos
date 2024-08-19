@@ -45,26 +45,34 @@
 
     <section class="participantes">
         @for (item of nJugadores; track $index) {
-            <section class="form_group">
-                <label> {{$index + 1}}º puesto</label>
-                <select formControlName="participante{{$index+1}}" name="Jugadores" id="jugadores">
-                    @for (jugador of jugadores; track $index) {
-                        <option value="{{jugador.id}}">{{jugador.username}}</option>
+        <section class="form_group jugador">
+            <label> Jugador</label>
+            <select formControlName="participante{{$index+1}}" name="Jugadores" id="jugadores">
+                @for (jugador of jugadoresDisponibles; track $index) {
+                <option value="{{jugador.id}}">{{jugador.username}}</option>
+                }
+            </select>
+            <label>Puesto</label>
+            <select formControlName="puestoparticipante{{$index+1}}" name="Jugadores" id="jugadores" >
+                @for (jugador of nJugadores; track $index) {
+                    <option value="{{$index+1}}">{{$index+1}}</option>
                     }
-                </select>
-            </section>
-        
-            
-            }
+            </select>
+        </section>
+
+       
+
+
+        }
     </section>
-    
+
 
     <section class="form_group btn_jugada">
-        <button [disabled]="formPartida.invalid || !partidaCreada" (click)="crearJugadas()">AGREGAR PUNTUACIONES</button>
+        <button [disabled]="formPartida.invalid || !partidaCreada" (click)="crearJugadas()">AGREGAR
+            PUNTUACIONES</button>
     </section>
 
-    
-    
+
+
 
 </form>
-
