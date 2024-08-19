@@ -82,6 +82,8 @@ export class FormCreatePartidaComponent {
       return
     }
 
+    this.jugadoresYPuestos = []
+
     //AGREGAMOS TODOS LOS JUGADORES QUE ESTAN APUNTADOS A UN ARRAY.
     for (let index = 0; index < this.nJugadores.length; index++) {
       let jugador = (this.formPartida.get("participante" + (index + 1)) as FormControl).value
@@ -204,7 +206,6 @@ export class FormCreatePartidaComponent {
 
     array.forEach((jugador) => {
       array.forEach((jugadorX) => {
-
         if (jugador.jugador == jugadorX.jugador) {
           ocurrencias++
         }
