@@ -198,14 +198,14 @@ export class FormCreatePartidaComponent {
 
 
   //Funcion que comprueba si se repite algun valor de un array numerico
-  seRepiteValor(array: Array<Number>): Boolean {
+  seRepiteValor(array: Array<any>): Boolean {
     let ocurrencias = 0
     let seRepite = false
 
-    array.forEach((idJugador) => {
-      array.forEach((idJugadorX) => {
+    array.forEach((jugador) => {
+      array.forEach((jugadorX) => {
 
-        if (idJugador == idJugadorX) {
+        if (jugador.jugador == jugadorX.jugador) {
           ocurrencias++
         }
 
